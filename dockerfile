@@ -13,8 +13,10 @@ RUN a2enmod rewrite
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/brlaravel/public|g' /etc/apache2/sites-available/000-default.conf
+# Beddel l-path l-StayEase/public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/StayEase/public|g' /etc/apache2/sites-available/000-default.conf
 
+# Activi AllowOverride bach .htaccess i-khdem
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-WORKDIR /var/www/html 
+WORKDIR /var/www/html
