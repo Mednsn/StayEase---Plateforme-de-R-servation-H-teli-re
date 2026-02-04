@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->date('check_in');
+            $table->date('check_out');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
             $table->timestamps();
         });
     }
