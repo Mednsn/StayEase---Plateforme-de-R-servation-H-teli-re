@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
 
@@ -9,10 +10,16 @@ Route::resource('hotels', HotelController::class);
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/room', function () {
+    return view('create');
+});
+
 Route::get('/sincription', function () {
     return view('/authentification/regester');
 });
-;
+
 Route::get('/longin', function () {
     return view('/authentification/connection');
 });
+Route::resource('/categories', CategoryController::class); 
