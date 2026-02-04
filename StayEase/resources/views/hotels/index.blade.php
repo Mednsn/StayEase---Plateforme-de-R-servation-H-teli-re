@@ -25,7 +25,7 @@
         </tr>
     </thead>
     <tbody>
-        @forelse($hotels as $hotel)
+        @foreach($hotels as $hotel)
             <tr>
                 <td>{{ $hotel->id }}</td>
                 <td>{{ $hotel->name }}</td>
@@ -40,7 +40,7 @@
                 </td>
             </tr>
       
-        @endforelse
+        @endforeach
     </tbody>
 </table>
 </body>

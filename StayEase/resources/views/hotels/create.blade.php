@@ -14,7 +14,17 @@
     
     <div>
         <label>Nom de l'hôtel :</label>
-        <input type="text" name="name" value="{{ old('name') }}" required>
+        <input type="text" name="name"  required>
+       
+    </div>
+     <div>
+        <label>description :</label>
+        <textarea type="text" name="description"></textarea>
+       
+    </div>
+     <div>
+        <label>address</label>
+        <input type="text" name="address" required>
        
     </div>
 
