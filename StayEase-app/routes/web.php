@@ -2,17 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\UserController;
 
-
-Route::get('/',[HotelController::class,'index']);
+// Route::get('/',[HotelController::class,'index']);
 Route::resource('hotels', HotelController::class);
+
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/sincription', function () {
-    return view('/authentification/regester');
-});
-;
-Route::get('/longin', function () {
-    return view('/authentification/connection');
-});
+Route::resource('authentification', UserController::class);
+
+
