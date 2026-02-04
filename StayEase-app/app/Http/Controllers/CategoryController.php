@@ -13,9 +13,6 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        dd($categories);
-        return 'wslat index';exit;
-
         return view('admin.categories', compact('categories'));
     }
 
