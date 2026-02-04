@@ -1,15 +1,20 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
 
 
-Route::get('/',[HotelController::class,'index']);
-Route::resource('hotels', HotelController::class);
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('hotels', HotelController::class);
+Route::put('/admin/{hotel}/approve', [AdminController::class, 'approve'])->name('admin.approve');
+Route::put('/admin/{hotel}/reject', [AdminController::class, 'reject'])->name('admin.reject');
+Route::resource('admin', adminController::class);
+
 
 Route::get('/room', function () {
     return view('create');

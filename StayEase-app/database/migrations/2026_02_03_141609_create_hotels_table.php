@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->string('address');
+            $table->string('status')->default('pending');
             $table->unsignedBigInteger('user_id')->default(1);
             $table->timestamps();
         });

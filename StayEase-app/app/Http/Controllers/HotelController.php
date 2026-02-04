@@ -12,7 +12,7 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::all(); 
+        $hotels = Hotel::where('status','approved')->get(); 
         return view('hotels.index', compact('hotels'));
     }
 
