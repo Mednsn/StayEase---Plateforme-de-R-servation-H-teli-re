@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('paiments', function (Blueprint $table) {
             $table->id();
             $table->float('price_paiment');
+            $table->foreignId('reservation_id')->constrained('reservations')->onDelete('cascade');
             $table->timestamps();
         });
     }
