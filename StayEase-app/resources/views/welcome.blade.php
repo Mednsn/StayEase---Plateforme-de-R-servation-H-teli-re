@@ -54,8 +54,8 @@
                                 <h1 class="display-5 fw-bolder text-white mb-2">the hotel for you weekend</h1>
                                 <p class="lead fw-normal text-white-50 mb-4">the set to search for room for your nigth </p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">commection</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="#!">s'inscription</a>
+                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="/longin">connection</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="/sincription">s'inscription</a>
                                 </div>
                             </div>
                         </div>  
