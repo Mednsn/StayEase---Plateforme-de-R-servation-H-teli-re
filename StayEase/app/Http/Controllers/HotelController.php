@@ -23,8 +23,11 @@ class HotelController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'description' => 'required',
+            'address' => 'required|string|max:255',
         ]);
 
     
@@ -47,15 +50,16 @@ class HotelController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('hotels.edit');        
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Hotel $hotel)
     {
-        //
+        
     }
 
     /**

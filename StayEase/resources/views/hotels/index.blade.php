@@ -21,6 +21,8 @@
         <tr>
             <th>ID</th>
             <th>Nom de l'Hôtel</th>
+            <th>description</th>
+            <th>address</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -29,6 +31,8 @@
             <tr>
                 <td>{{ $hotel->id }}</td>
                 <td>{{ $hotel->name }}</td>
+                <td>{{ $hotel->address }}</td>
+                <td>{{ $hotel->description }}</td>
                 <td>
                     <a href="{{ route('hotels.edit', $hotel) }}">Modifier</a>
 
