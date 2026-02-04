@@ -2,13 +2,19 @@
 
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HotelController;
 
+
+Route::get('/',[HotelController::class,'index']);
+Route::resource('hotels', HotelController::class);
 Route::get('/', function () {
     return view('welcome');
-});Route::get('/sincription', function () {
+});
+Route::get('/sincription', function () {
     return view('/authentification/regester');
 });
-;Route::get('/longin', function () {
+;
+Route::get('/longin', function () {
     return view('/authentification/connection');
 });
 Route::resource('/categories', CategoryController::class); 
