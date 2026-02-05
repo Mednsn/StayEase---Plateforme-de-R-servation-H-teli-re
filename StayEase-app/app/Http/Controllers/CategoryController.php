@@ -12,8 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // echo "wslat index ";exit;
         $categories = Category::all();
-        return view('admin.categories', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -62,7 +63,6 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255',
         ]);
-
         $category->update($validated);
 
         return back();
