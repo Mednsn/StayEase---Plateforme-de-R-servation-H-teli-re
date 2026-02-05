@@ -16,8 +16,14 @@ class Room extends Model
     {
         return $this->belongsToMany(Property::class, 'rooms_properties');
     }
+<<<<<<< HEAD
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'rooms_hotel');
+=======
     public function category()
     {
         return $this->belongsTo(Category::class);
+>>>>>>> a6fb4228d736298b2c24e7b8a93eba4abeb6fb52
     }
 }
