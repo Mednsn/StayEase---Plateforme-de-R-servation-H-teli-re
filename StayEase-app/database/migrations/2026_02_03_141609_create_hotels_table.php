@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('address');
             $table->string('status')->default('pending');
-            $table->unsignedBigInteger('user_id')->default(1);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+    
     public function down(): void
     {
         Schema::dropIfExists('hotels');
