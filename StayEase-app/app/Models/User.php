@@ -17,8 +17,8 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-   protected $fillable = [
-        'firstname', 
+    protected $fillable = [
+        'firstname',
         'lastname',
         'email',
         'password',
@@ -49,12 +49,17 @@ class User extends Authenticatable
         ];
     }
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 
-    public function hotels() {
-    return $this->hasMany(Hotel::class);
-}
-
+    public function hotels()
+    {
+        return $this->hasMany(Hotel::class);
+    }
+    public function reservation()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
