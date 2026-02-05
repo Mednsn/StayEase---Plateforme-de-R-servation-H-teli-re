@@ -35,7 +35,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $id = Role::find($request['role_id']);
-      if($id['name']=='gerant'){
+      if($id['name']=='Gerant'){
           $request['status']='desactive';
           }else{
               $request['status']='active';
