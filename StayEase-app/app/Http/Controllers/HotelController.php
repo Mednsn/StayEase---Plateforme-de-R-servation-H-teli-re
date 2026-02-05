@@ -12,7 +12,7 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::all(); 
+        $hotels = Hotel::where('status','approved')->get(); 
         return view('hotels.index', compact('hotels'));
     }
 
@@ -48,9 +48,9 @@ class HotelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Hotel $hotel)
     {
-        return view('hotels.edit');        
+        return view('hotels.edit',compact('hotel'));        
 
     }
 
@@ -59,14 +59,23 @@ class HotelController extends Controller
      */
     public function update(Request $request, Hotel $hotel)
     {
-        
+         $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required',
+            'address' => 'required|string|max:255',
+        ]);
+
+    
+        $hotel->update($validated);
+        return redirect()->route('hotels.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Hotel $hotel)
     {
-        //
+         $hotel->delete();
+        return redirect()->route('hotels.index');
     }
 }
