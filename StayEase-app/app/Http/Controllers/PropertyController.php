@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
-use App\Models\Tag;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class PropertyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('tags.index', ['tags' => Tag::all()]);
+        return view('properties.index', ['properties' => Property::all()]);
     }
 
     /**
@@ -21,7 +20,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        return view('properties.create');
     }
 
     /**
@@ -29,10 +28,12 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate(['name' => 'required|string|max:50']);
-        $validated['slug'] = Str::slug($validated['name']);
-        Tag::create($validated);
-        return redirect()->route('tags.index');
+        $validated = $request->validate([
+            'name' => 'required|string|max:50',
+            'icon' => 'required'
+        ]);
+        Property::create($validated);
+        return redirect()->route('properties.index');
     }
 
     /**
@@ -48,7 +49,7 @@ class TagController extends Controller
      */
     public function edit(string $id)
     {
-        return view('tags.edit', compact('tag'));
+        //
     }
 
     /**
@@ -62,9 +63,9 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tag $tag)
+    public function destroy(Property $property)
     {
-        $tag->delete();
-        return redirect()->route('tags.index');
+        $property->delete();
+        return redirect()->route('properties.index');
     }
 }
