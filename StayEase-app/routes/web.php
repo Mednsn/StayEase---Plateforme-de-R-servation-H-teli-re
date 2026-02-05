@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
 
@@ -9,10 +10,6 @@ use App\Http\Controllers\HotelController;
 // Route::resource('hotels', HotelController::class);
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/room', function () {
-    return view('create');
 });
 
 Route::get('/sincription', function () {
@@ -24,5 +21,8 @@ Route::get('/longin', function () {
 });
 
 Route::resource('tags', TagController::class);
+
+Route::resource('properties', PropertyController::class);
+
 
 
