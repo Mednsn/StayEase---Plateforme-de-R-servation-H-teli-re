@@ -52,7 +52,7 @@
             <d class="row gx-5 justify-content-center mb-5">
     <div class="col-lg-10">
         <form action="{{ route('hotels.index') }}" method="GET" class="card p-4 shadow-sm border-0 bg-light">
-                    <label class="form-label fw-bold small text-uppercase">City</label>
+                    <label class=" fw-bold small text-uppercase">City</label>
                     <select name="address" class="form-select">
                         <option value="">All Cities</option>
                         @foreach($hoteladdress as $hotel)
