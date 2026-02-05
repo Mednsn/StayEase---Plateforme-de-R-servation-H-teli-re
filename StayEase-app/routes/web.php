@@ -14,6 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('authentification', UserController::class);
+Route::post('/authentification/login', [UserController::class,'login']);
 
 
 
