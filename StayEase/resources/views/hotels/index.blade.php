@@ -48,6 +48,27 @@
             <!-- Header-->
           
             </header>
+
+            <div class="row gx-5 justify-content-center mb-5">
+    <div class="col-lg-10">
+        <form action="{{ route('hotels.index') }}" method="GET" class="card p-4 shadow-sm border-0 bg-light">
+                    <label class="form-label fw-bold small text-uppercase">City</label>
+                    <select name="address" class="form-select">
+                        <option value="">All Cities</option>
+                        @foreach($hoteladdress as $hotel)
+                        <option value="{{$hotel->address}}">{{$hotel->address}}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100"> Filter </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
                        
             <section class="py-5">
                 <div class="container px-5 my-5">
