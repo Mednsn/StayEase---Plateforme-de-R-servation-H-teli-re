@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{ $hotel->name }}</td>
                         <td>{{ $hotel->address }}</td>
-                        <td>{{$hotel->user->name}}</td>
+                        <td>{{$hotel->user->firstname}} {{$hotel->user->lastname}}</td>
                          <td>{{ $hotel->status }}</td>
                         <td>
                         <form action="{{ route('admin.approve', $hotel) }}" method="POST">
