@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -10,9 +11,17 @@ class ReservationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+         $request->validate([
+            'check_in' => 'required',
+            'check_out' => 'required',
+        ]);
+        $date_in = $request->check_in;
+        $date_out = $request->check_out;
+        $rooms_disponible = DB::table('reservations')->where('check_out','<',$request->check_in)->get();
+       return view('categories.checkRooms',compact('rooms_disponible','date_in','date_out'));
     }
 
     /**
