@@ -12,7 +12,7 @@
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
 </head>
 
 <body class="d-flex flex-column">
@@ -72,25 +72,29 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                            <form method="post"  action="{{ route('authentification.store') }}">
                                 <!-- Name input-->
+                                 @csrf
+                                 @method('post')
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="firstname" name="firstname" type="text"
                                         placeholder="Enter your name..." data-sb-validations="required" />
                                     <label for="name">First name</label>
-                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">A First name is
+                                        required.
                                     </div>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="lastname" name="lastname" type="text"
                                         placeholder="Enter your name..." data-sb-validations="required" />
                                     <label for="name">Last name</label>
-                                    <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.
+                                    <div class="invalid-feedback" data-sb-feedback="name:required">A Last name is
+                                        required.
                                     </div>
                                 </div>
                                 <!-- Email address input-->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="email" type="email" placeholder="name@example.com"
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com"
                                         data-sb-validations="required,email" />
                                     <label for="email">Email address</label>
                                     <div class="invalid-feedback" data-sb-feedback="email:required">An email is
@@ -100,7 +104,7 @@
                                 </div>
                                 <!-- Phone number input-->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="phone" type="password" placeholder="****"
+                                    <input class="form-control" id="password" name="password" type="password" placeholder="****"
                                         data-sb-validations="required" />
                                     <label for="phone">password</label>
                                     <div class="invalid-feedback" data-sb-feedback="phone:required">the password is
@@ -109,45 +113,49 @@
                                 <!-- Message input-->
                                 <div class="form-floating mb-3">
                                     <select name="role_id" class="form-select">
-                                        <option selected disabled >Choisir le role</option>
-                                        <option value=1>
-                                            admin
+                                        <option selected disabled>Choisir le role</option>
+                                        @foreach ($roles as $role )
+                                        <option value="{{ $role->id }}">
+                                            {{ $role->name }}
                                         </option>
+                                        @endforeach
                                     </select>
-                                    <label for="message">role</label>
                                     <div class="invalid-feedback" data-sb-feedback="message:required">A message is
                                         required.</div>
                                 </div>
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        To activate this form, sign up at
-                                        <br />
-                                        <a
-                                            href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <div class="d-none" id="submitErrorMessage">
-                                    <div class="text-center text-danger mb-3">Error sending message!</div>
-                                </div>
-                                <!-- Submit Button-->
-                                <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton"
-                                        type="submit">Submit</button></div>
-                                        
-                            </form>
+                                <input class="form-control" id="status" name="status" type="hidden" />
+                            
+                        <!-- Submit success message-->
+                        <!---->
+                        <!-- This is what your users will see when the form-->
+                        <!-- has successfully submitted-->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Form submission successful!</div>
+                                To activate this form, sign up at
+                                <br />
+                                <a
+                                    href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                            </div>
                         </div>
+                        <!-- Submit error message-->
+                        <!---->
+                        <!-- This is what your users will see when there is-->
+                        <!-- an error submitting the form-->
+                        <div class="d-none" id="submitErrorMessage">
+                            <div class="text-center text-danger mb-3">Error sending message!</div>
+                        </div>
+                        <!-- Submit Button-->
+                       
+                            <button class="btn btn-primary btn-lg w-100" id="submit"
+                                type="submit">Submit</button>
+
+                        </form>
                     </div>
                 </div>
-                <!-- Contact cards-->
-                
+            </div>
+            <!-- Contact cards-->
+
             </div>
         </section>
     </main>
