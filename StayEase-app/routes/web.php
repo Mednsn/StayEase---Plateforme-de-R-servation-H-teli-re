@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
 
 Route::resource('hotels', HotelController::class);
-Route::put('/admin/{hotel}/approve', [AdminController::class, 'approve'])->name('admin.approve');
+Route::put('/admin/{hotel}/approve', [AdminController::class, 'approve'])->name('admin.approve'); 
 Route::put('/admin/{hotel}/reject', [AdminController::class, 'reject'])->name('admin.reject');
 Route::resource('admin', adminController::class);
 
