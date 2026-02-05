@@ -30,6 +30,11 @@ class UserController extends Controller
         return view('/authentification/regester', compact('roles'));
 
     }
+      public function logout(){
+  
+                 
+
+      }
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -103,6 +108,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       auth::logout();
+                 return redirect('/');
     }
 }
