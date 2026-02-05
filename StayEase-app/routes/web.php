@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\UserController;
 
+// Route::get('/',[HotelController::class,'index']);
+Route::resource('hotels', HotelController::class);
+
+
 
 // Route::get('/',[HotelController::class,'index']);
 // Route::resource('hotels', HotelController::class);
@@ -16,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('authentification', UserController::class);
+Route::post('/authentification/login', [UserController::class,'login']);
+
+
+
 Route::resource('hotels', HotelController::class);
 Route::put('/admin/{hotel}/approve', [AdminController::class, 'approve'])->name('admin.approve');
 Route::put('/admin/{hotel}/reject', [AdminController::class, 'reject'])->name('admin.reject');
@@ -27,6 +35,7 @@ Route::get('/sincription', function () {
 Route::get('/longin', function () {
     return view('/authentification/connection');
 });
+Route::resource('/categories', CategoryController::class); 
 
 Route::resource('tags', TagController::class);
 Route::resource('properties', PropertyController::class);
