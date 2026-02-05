@@ -48,24 +48,41 @@
             <!-- Header-->
           
             </header>
-            
-            <!-- Testimonial section-->
-           
-            <!-- Blog preview section-->
+
+            <d class="row gx-5 justify-content-center mb-5">
+    <div class="col-lg-10">
+        <form action="{{ route('hotels.index') }}" method="GET" class="card p-4 shadow-sm border-0 bg-light">
+                    <label class=" fw-bold small text-uppercase">City</label>
+                    <select name="address" class="form-select">
+                        <option value="">All Cities</option>
+                        @foreach($hoteladdress as $hotel)
+                        <option value="{{$hotel->address}}">{{$hotel->address}}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary w-100"> Filter </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+                       
             <section class="py-5">
                 <div class="container px-5 my-5">
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
                                 <h2 class="fw-bolder">List of hotels</h2>
-                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="row gx-5">
-    @foreach($hotels as $hotel)
-        <div class="col-lg-4 mb-5">
-            <div class="card h-100 shadow border-0">
+               </div>
+              <div class="row gx-5">
+       @foreach($hotels as $hotel)
+               <div class="col-lg-4 mb-5">
+               <div class="card h-100 shadow border-0">
                 <img class="card-img-top" src="https://media.istockphoto.com/id/487042276/photo/hotel-sign.jpg?s=612x612&w=0&k=20&c=DjEVAoFnjB2cWwX28cxSKWkxsbze7o9jgkYrhyfmq9E="/>
                 <div class="card-body p-4">
                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">new</div>
@@ -82,21 +99,14 @@
                     </div>
                     
                     <div class="d-flex gap-2 mt-3">
-                        <a href="{{ route('hotels.edit', $hotel) }}" class="btn btn-outline-warning btn-sm flex-fill">Edit </a>
-
-                        <form action="{{ route('hotels.destroy', $hotel) }}" method="POST" class="flex-fill">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                Delete
-                            </button>
-                        </form>
                     </div>
                 </div>
              </div>
             </div>
         @endforeach
         </div>
+            <a href="{{ route('admin.index') }}" class="btn btn-outline-warning btn-sm flex-fill">admin </a>
+
                     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         

@@ -10,10 +10,20 @@ class HotelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $hotels = Hotel::all(); 
-        return view('hotels.index', compact('hotels'));
+         
+     $hoteladdress =  Hotel::where('status','approved')->get();
+
+        if($request->has('address') && $request->address !=''){
+
+            $hotels = Hotel::where('status','approved')->where('address',$request->address)->get(); 
+        }
+        else {
+            $hotels = Hotel::where('status','approved')->get(); 
+        }
+
+        return view('hotels.index', compact('hotels','hoteladdress'));
     }
 
     public function create()

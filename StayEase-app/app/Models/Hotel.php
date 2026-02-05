@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
-    protected $fillable = ['name','description','address'];
+    protected $fillable = ['name','description','address','status','user_id'];
   
     public function user(){
     return $this->belongsTo(User::class);
+    }
+    public function room(){
+    return $this->hasMany(Room::class);
     }
 }
