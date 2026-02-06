@@ -7,6 +7,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -30,11 +31,12 @@ class UserController extends Controller
         return view('/authentification/regester', compact('roles'));
 
     }
-      public function logout(){
-  
-                 
+    public function logout()
+    {
 
-      }
+
+
+    }
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -42,10 +44,11 @@ class UserController extends Controller
             'password' => ['required'],
         ]);
 
+
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return redirect()->intended('/');
+            return redirect('/');
         }
 
         return back()->withErrors([
@@ -108,7 +111,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-       auth::logout();
-                 return redirect('/');
+        auth::logout();
+        return redirect('/');
     }
 }
