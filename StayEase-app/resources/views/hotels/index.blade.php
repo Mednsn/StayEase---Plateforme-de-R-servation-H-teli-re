@@ -16,8 +16,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -33,9 +31,9 @@
                                     <label class="form-label fw-bold text-muted small text-uppercase">Filter by City</label>
                                     <select name="address" class="form-select border-0 bg-light">
                                         <option value="">All Cities</option>
-                                        @foreach($hoteladdress as $addr)
-                                            <option value="{{$addr->address}}" {{ request('address') == $addr->address ? 'selected' : '' }}>
-                                                {{$addr->address}}
+                                        @foreach($hoteladdress as $hotel)
+                                            <option value="{{$hotel->address}}">
+                                                {{$hotel->address}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -56,7 +54,6 @@
             <div class="container px-5">
                 <div class="text-center mb-5">
                     <h2 class="fw-bolder">List of Hotels</h2>
-                    <p class="lead fw-normal text-muted mb-0">Discover our best destinations</p>
                 </div>
                 
                 <div class="row gx-5">
@@ -67,7 +64,7 @@
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
                                     <h5 class="card-title mb-3 fw-bold">{{ $hotel->name }}</h5>
-                                    <p class="card-text mb-0 text-muted small">{{ Str::limit($hotel->description, 100) }}</p>
+                                    <p class="card-text mb-0 text-muted small">{{ $hotel->description}}</p>
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                     <div class="d-flex align-items-center mb-3">
@@ -77,7 +74,7 @@
                                     
                                     <form action="{{ route('rooms.index') }}" method="GET">
                                         <input type="hidden" name="hotel_id" value="{{$hotel->id}}">
-                                        <button type="submit" class="btn btn-outline-dark btn-sm w-100">Voir Chambr </button>
+                                        <button type="submit" class="btn btn-outline-dark btn-sm w-100">Voir Chambres</button>
                                     </form>
                                 </div>
                             </div>
@@ -85,7 +82,11 @@
                     @endforeach
                 </div>
 
-                <div class="text-center">
+                <div class="d-flex justify-content-center mt-3 mb-5">
+                    {{$hotels->links('pagination::bootstrap-5') }}
+                </div>
+
+                <div class="text-center border-top pt-5">
                     <a href="{{ route('admin.index') }}" class="btn btn-warning shadow-sm"> Admin</a>
                 </div>
             </div>
