@@ -21,7 +21,7 @@
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
                 <div class="text-secondary small fw-bold text-uppercase mt-3 mb-1" style="font-size: 0.7rem;">Interface</div>
-                <a href="{{route('hotels.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between">
+                <a href="{{route('admin.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between">
                     <span><i class="bi bi-building me-2"></i> Hôtels</span>
                     <i class="bi bi-chevron-right small"></i>
                 </a>
@@ -39,16 +39,16 @@
         <div class="flex-grow-1 p-4">
             
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800 fw-bold text-secondary">Hôtels en attente</h1>
+                <h1 class="h3 mb-0 text-gray-800 fw-bold text-secondary">ALL UTILISATEURS</h1>
             </div>
 
             <nav class="mb-4 bg-white p-3 rounded shadow-sm border">
-                <span class="text-muted fw-bold">Dashboard / Hotels En Attente</span>
+                <span class="text-muted fw-bold">Dashboard / UTILISATEURS</span>
             </nav>
 
             <div class="card shadow border-0 mb-4">
                 <div class="card-header py-3 bg-light border-bottom">
-                    <h6 class="m-0 fw-bold text-primary"><i class="bi bi-table me-2"></i>Pending List</h6>
+                    <h6 class="m-0 fw-bold text-primary"><i class="bi bi-table me-2"></i>Utilisateurs List</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -56,40 +56,38 @@
                             <thead class="table-light">
                                 <tr class="text-secondary small text-uppercase fw-bold">
                                     <th>Nom</th>
-                                    <th>Adresse</th>
-                                    <th>Gérant</th>
-                                    <th>Status</th>
+                                    <th>Email</th>
+                                    <th>Date create</th>
+                                    <th>Role</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($hotels as $hotel)
+                                @foreach($users as $user)
                                     <tr>
-                                        <td class="fw-bold">{{ $hotel->name }}</td>
-                                        <td>{{ $hotel->address }}</td>
+                                        <td class="fw-bold">{{ $user->firstname }} {{ $user->lastname }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td>
-                                            <div class="small fw-bold">{{ $hotel->user->firstname }} {{ $hotel->user->lastname }}</div>
+                                            <div class="small fw-bold">{{ $user->created_at }}</div>
                                         </td>
                                         <td>
-                                            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill small">
-                                                <i class="bi bi-clock-history me-1"></i> {{ $hotel->status }}
-                                            </span>
+                                            <span class="badge  text-dark px-3 py-2 rounded-pill small"> {{ $user->role->name }}   </span>
                                         </td>
                                         <td>
                                             <div class="d-flex gap-2 justify-content-center">
-                                                <form action="{{ route('admin.approve', $hotel) }}" method="POST">
+                                                <form action="{{ route('admin.update', $user) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <button type="submit" class="btn btn-success btn-sm px-3 shadow-sm border-0">
-                                                        <i class="bi bi-check-circle me-1"></i> Approuver
+                                                        <i class="bi bi-check-circle me-1"></i> Update
                                                     </button>
                                                 </form>
 
-                                                <form action="{{ route('admin.reject', $hotel) }}" method="POST">
+                                                <form action="{{ route('admin.destroy', $user) }}" method="POST">
                                                     @csrf
-                                                    @method('PUT')
+                                                    @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm px-3 shadow-sm border-0">
-                                                        <i class="bi bi-x-circle me-1"></i> Rejeter
+                                                        <i class="bi bi-x-circle me-1"></i> DELETE
                                                     </button>
                                                 </form>
                                             </div>
