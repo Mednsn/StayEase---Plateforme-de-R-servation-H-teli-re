@@ -11,15 +11,19 @@ class HotelSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        $properties = ['Salam', 'Raha'];
-        foreach ($properties as $property) {
-            Hotel::create([
-                'name' => $property,
-                'description'=> $property,
-                'address'=> $property,
-            ]);
-        }
+   public function run(): void
+{
+    $managerRole = \App\Models\Role::firstOrCreate(['name' => 'Manager']);
+    $adminRole = \App\Models\Role::firstOrCreate(['name' => 'Admin']);
+
+    $users = \App\Models\User::factory(5)->create([
+        'role_id' => $managerRole->id
+    ]);
+
+    foreach ($users as $user) {
+        \App\Models\Hotel::factory(4)->create([
+            'user_id' => $user->id,
+        ]);
     }
+}
 }

@@ -7,7 +7,9 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+
+use function Laravel\Prompts\alert;
+use function Laravel\Prompts\info;
 
 class UserController extends Controller
 {
@@ -47,8 +49,20 @@ class UserController extends Controller
 
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/');
+            $status = User::where("email", $request->email)->value('status');
+
+            if ($status === 'desactive') {
+                
+                auth::logout();
+                return redirect('/');
+
+            } else {
+
+                $request->session()->regenerate();
+                return redirect('/');
+
+            }
+
         }
 
         return back()->withErrors([
