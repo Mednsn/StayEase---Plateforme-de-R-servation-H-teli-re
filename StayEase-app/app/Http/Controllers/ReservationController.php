@@ -14,14 +14,23 @@ class ReservationController extends Controller
     public function index(Request $request)
     {
 
-         $request->validate([
+        $request->validate([
             'check_in' => 'required',
             'check_out' => 'required',
         ]);
         $date_in = $request->check_in;
         $date_out = $request->check_out;
-        $rooms_disponible = DB::table('reservations')->where('check_out','<',$request->check_in)->get();
-       return view('categories.checkRooms',compact('rooms_disponible','date_in','date_out'));
+
+        $rooms_disponible = DB::table('rooms')
+            ->leftJoin('reservations', 'rooms.id', '=', 'reservations.room_id')
+            ->select('rooms.*', 'reservations.check_in','reservations.check_out')
+            ->where('check_out', '>', $request->check_in)
+            ->where('check_in', '>', $request->check_out)
+            ->get();
+
+        dd($rooms_disponible);
+
+        return view('categories.checkRooms', compact('rooms_disponible', 'date_in', 'date_out'));
     }
 
     /**

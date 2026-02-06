@@ -23,11 +23,14 @@ Route::post('/authentification/logout', [UserController::class,'logout']);
 
 Route::post('/authentification/login', [UserController::class, 'login']);
 
+Route::get('/admin/usersdashbord',[AdminController::class,'getUsers'])->name('admin.getUsers');
 
 Route::resource('hotels', HotelController::class);
 Route::put('/admin/{hotel}/approve', [AdminController::class, 'approve'])->name('admin.approve');
 Route::put('/admin/{hotel}/reject', [AdminController::class, 'reject'])->name('admin.reject');
 Route::resource('admin', adminController::class);
+
+
 Route::get('/sincription', function () {
     return view('/authentification/regester');
 });
@@ -42,5 +45,5 @@ Route::get('rooms/check-room', function () {
 Route::post('/rooms/check-room', [ReservationController::class, 'index'])->name('room.check-rooms');
 Route::resource('tags', TagController::class);
 Route::resource('properties', PropertyController::class);
-Route::resource('/categories', CategoryController::class);
+Route::resource('categories', CategoryController::class);
 Route::resource('rooms', RoomController::class);
