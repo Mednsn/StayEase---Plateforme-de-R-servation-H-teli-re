@@ -43,9 +43,7 @@ class HotelController extends Controller
             'address' => 'required|string|max:255',
         ]);
 
-    
         Hotel::create($validated);
-
         return redirect()->route('hotels.index');
     }
 
