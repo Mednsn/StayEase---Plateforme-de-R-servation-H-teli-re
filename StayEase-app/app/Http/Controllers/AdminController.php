@@ -13,7 +13,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::where('status','pending')->with('user')->get();
+         $hotels = Hotel::where('status','pending')->with('user')->get();
         return view('admin.admin', compact('hotels'));
 
     }
