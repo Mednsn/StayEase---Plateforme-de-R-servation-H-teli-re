@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+use function Laravel\Prompts\alert;
+use function Laravel\Prompts\info;
+
 class UserController extends Controller
 {
     /**
@@ -30,11 +33,12 @@ class UserController extends Controller
         return view('/authentification/regester', compact('roles'));
 
     }
-      public function logout(){
-  
-                 
+    public function logout()
+    {
 
-      }
+
+
+    }
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -42,10 +46,27 @@ class UserController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
 
-            return redirect()->intended('/');
+
+        if (Auth::attempt($credentials)) {
+            $user = User::where("email", $request->email)->get();
+               $role = Role::find($user->value(key: 'role_id'))->value('name');
+              
+            if ($user->value('status') === 'desactive') {
+                
+                auth::logout();
+                return redirect('/');
+
+            } else {
+                if($role==='admine'){
+                     dd($role);
+                     }
+
+                $request->session()->regenerate();
+                return redirect('/');
+
+            }
+
         }
 
         return back()->withErrors([
@@ -108,7 +129,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-       auth::logout();
-                 return redirect('/');
+        auth::logout();
+        return redirect('/');
     }
 }
