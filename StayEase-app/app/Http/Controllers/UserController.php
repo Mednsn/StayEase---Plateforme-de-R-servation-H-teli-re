@@ -49,14 +49,18 @@ class UserController extends Controller
 
 
         if (Auth::attempt($credentials)) {
-            $status = User::where("email", $request->email)->value('status');
-
-            if ($status === 'desactive') {
+            $user = User::where("email", $request->email)->get();
+               $role = Role::find($user->value(key: 'role_id'))->value('name');
+              
+            if ($user->value('status') === 'desactive') {
                 
                 auth::logout();
                 return redirect('/');
 
             } else {
+                if($role==='admine'){
+                     dd($role);
+                     }
 
                 $request->session()->regenerate();
                 return redirect('/');
