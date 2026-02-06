@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.categories', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
     /**
