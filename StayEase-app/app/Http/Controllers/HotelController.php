@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 
@@ -10,16 +10,29 @@ class HotelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $hotels = Hotel::where('status','approved')->get(); 
-        return view('hotels.index', compact('hotels'));
+        
+         
+     $hoteladdress =  Hotel::where('status','approved')->select("address")->get();
+
+     $hote = DB::table('hotels')->where('status', 'approved');
+
+    if ($request->address) {
+        $hote->where('address', $request->address);
     }
+
+    $hotels = $hote->paginate(6)->appends($request->query());
+
+    return view('hotels.index', compact('hotels', 'hoteladdress'));
+    }
+
 
     public function create()
     {
         return view('hotels.create');        
     }
+
 
     public function store(Request $request)
     {

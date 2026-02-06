@@ -53,11 +53,12 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                
+                            <form action="/authentification/login " method="post">
+                                @csrf
+                                 @method('post')
                                 <!-- Email address input-->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="email" type="email" placeholder="name@example.com"
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com"
                                         data-sb-validations="required,email" />
                                     <label for="email">Email address</label>
                                     <div class="invalid-feedback" data-sb-feedback="email:required">An email is
@@ -67,7 +68,7 @@
                                 </div>
                                 <!-- Phone number input-->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="phone" type="password" placeholder="****"
+                                    <input class="form-control" id="password" name="password" type="password" placeholder="****"
                                         data-sb-validations="required" />
                                     <label for="phone">password</label>
                                     <div class="invalid-feedback" data-sb-feedback="phone:required">the password is
@@ -91,7 +92,7 @@
                                     <div class="text-center text-danger mb-3">Error sending message!</div>
                                 </div>
                                 <!-- Submit Button-->
-                                <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton"
+                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton"
                                         type="submit">Submit</button></div>
                                         
                             </form>
