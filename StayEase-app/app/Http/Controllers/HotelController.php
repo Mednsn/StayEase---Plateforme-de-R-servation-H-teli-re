@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
@@ -12,24 +13,32 @@ class HotelController extends Controller
      */
     public function index(Request $request)
     {
-        
          
-     $hoteladdress =  Hotel::where('status','approved')->select("address")->get();
+        $hoteladdress =  Hotel::where('status','approved')->select("address")->get();
 
-     $hote = DB::table('hotels')->where('status', 'approved');
+        $hote = DB::table('hotels')->where('status', 'approved');
 
-    if ($request->address) {
-        $hote->where('address', $request->address);
-    }
+        if ($request->address) {
+            $hote->where('address', $request->address);
+        }
 
-    $hotels = $hote->paginate(6)->appends($request->query());
+        $hotels = $hote->paginate(6)->appends($request->query());
 
-    return view('hotels.index', compact('hotels', 'hoteladdress'));
+        return view('hotels.index', compact('hotels', 'hoteladdress'));
     }
 
 
     public function create()
     {
+
+      $user = Auth::user();
+
+    if(!Auth::check()){
+         return view('authentification.connection');
+       }
+    if($user->role->name != "gerant"){
+            return view('welcome');
+       }
         return view('hotels.create');        
     }
 
@@ -40,9 +49,10 @@ class HotelController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required',
-            'address' => 'required|string|max:255',
+            'address' => 'required|string|max:255'
         ]);
-
+         $validated['user_id'] = Auth::id();
+    
         Hotel::create($validated);
         return redirect()->route('hotels.index');
     }
@@ -61,6 +71,9 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
+        if(!Auth::check()){
+         return view('authentification.connection');
+       }
         return view('hotels.edit',compact('hotel'));        
 
     }
@@ -70,6 +83,9 @@ class HotelController extends Controller
      */
     public function update(Request $request, Hotel $hotel)
     {
+        if(!Auth::check()){
+         return view('authentification.connection');
+       }
          $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required',

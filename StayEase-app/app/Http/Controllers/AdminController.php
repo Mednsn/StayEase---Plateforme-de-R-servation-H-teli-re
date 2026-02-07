@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use App\Models\Role;
 use App\Models\User;
 
 
@@ -33,9 +34,10 @@ class AdminController extends Controller
         //
     }
 
-    public function edit(User $user){
-        
-      return view('admin.edit',compact('user'));
+    public function edit(User $admin){
+
+       $roles = Role::all();
+      return view('admin.edit',compact('admin','roles'));
 
     }
 
@@ -43,15 +45,17 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request,User $user){
+    public function update(Request $request,User $admin){
 
       $validated = $request->validate([
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
             'email' => 'required|max:255',
-            'password' => 'required|max:255',
+            'role_id'=>'required|integer',
         ]);
-        $user->update($validated);
+        $admin->update($validated);
+
+      return redirect()->route('admin.getUsers');
 
     }
 
@@ -73,7 +77,8 @@ class AdminController extends Controller
 
    }
 
-   public function destroy(){
-
+   public function destroy(User $admin){
+      $admin->delete();
+     return redirect()->route('admin.getUsers');
    }
 }
