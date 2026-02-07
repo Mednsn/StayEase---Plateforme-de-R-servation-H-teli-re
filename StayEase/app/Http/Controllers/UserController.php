@@ -40,42 +40,37 @@ class UserController extends Controller
 
     }
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
+    if (Auth::attempt($credentials)) {
 
+        $request->session()->regenerate();
 
-        if (Auth::attempt($credentials)) {
-            $user = User::where("email", $request->email)->get();
-               $role = Role::find($user->value(key: 'role_id'))->value('name');
-              
-            if ($user->value('status') === 'desactive') {
-                
-                auth::logout();
-                return redirect('/');
+        $user = Auth::user();
 
-            } else {
-                if($role==='admine'){
-                     dd($role);
-                     }
-
-                $request->session()->regenerate();
-                return redirect('/');
-
-            }
-
+        if ($user->status === 'desactive') {
+            Auth::logout();
+            return redirect('/')->withErrors([
+                'email' => 'Your account is deactivated'
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        if ($user->role->name === 'admin') {
+            return redirect('/admin');
+        }
 
-
-
+        return redirect('/');
     }
+
+    return back()->withErrors([
+        'email' => 'The provided credentials do not match our records.',
+    ])->onlyInput('email');
+}
+
 
     /**
      * Store a newly created resource in storage.
