@@ -28,7 +28,7 @@ class ReservationController extends Controller
             ->where('check_in', '>', $request->check_out)
             ->get();
 
-        dd($rooms_disponible);
+        // dd($rooms_disponible);
 
         return view('categories.checkRooms', compact('rooms_disponible', 'date_in', 'date_out'));
     }
@@ -46,7 +46,17 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+   
+        $validated = $request->validate([
+            'name'=>'require | max:255',
+            'check_in'=>'require',
+            'check_out'=>'require',
+            'user_id'=>'require',
+            'room_id'=>'require',
+        ]);
+        Reservation::created($validated);
+
+        return back();
     }
 
     /**
@@ -70,7 +80,16 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //
+        $validated = $request->validate([
+            'name'=>'require | max:255',
+            'check_in'=>'require',
+            'check_out'=>'require',
+            'user_id'=>'require',
+            'room_id'=>'require',
+        ]);
+        $reservation->update($validated);
+
+        return back();
     }
 
     /**
@@ -78,6 +97,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return back();
     }
 }

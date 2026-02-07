@@ -19,8 +19,7 @@ class Room extends Model
     public function hotel()
     {
         return $this->belongsTo(Hotel::class, 'rooms_hotel');
-        }
-
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);

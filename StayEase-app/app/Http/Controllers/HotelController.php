@@ -52,9 +52,8 @@ class HotelController extends Controller
             'address' => 'required|string|max:255'
         ]);
          $validated['user_id'] = Auth::id();
-       
+    
         Hotel::create($validated);
-
         return redirect()->route('hotels.index');
     }
 
