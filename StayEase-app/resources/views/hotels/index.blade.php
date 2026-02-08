@@ -28,14 +28,25 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <form action="{{ route('hotels.index') }}" method="GET" class="card p-4 shadow border-0">
+                                <div class="row align-items-end g-3">
+                                <div class="col-md-9">
+                                    <label class="form-label fw-bold text-muted small text-uppercase" >Name of Hotel</label>
+                                     <input type="text" name="serch" class= "form-control bg-light" placeholder= "name hotel">
+                                  </div>
+                                  <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary w-100 fw-bold">
+                                        <i class="bi bi-filter"></i> Search
+                                    </button>
+                                </div>
+                                 </div>
                             <div class="row align-items-end g-3">
                                 <div class="col-md-9">
                                     <label class="form-label fw-bold text-muted small text-uppercase">Filter by City</label>
-                                    <select name="address" class="form-select border-0 bg-light">
+                                    <select name="city" class="form-select border-0 bg-light">
                                         <option value="">All Cities</option>
-                                        @foreach($hoteladdress as $hotel)
-                                            <option value="{{$hotel->address}}">
-                                                {{$hotel->address}}
+                                        @foreach($hotels as $hotel)
+                                            <option value="{{$hotel->city}}">
+                                                {{$hotel->city}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -67,6 +78,7 @@
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
                                     <h5 class="card-title mb-3 fw-bold">{{ $hotel->name }}</h5>
                                     <p class="card-text mb-0 text-muted small">{{ $hotel->description}}</p>
+                                    <p class="card-text mb-0 text-muted small">{{ $hotel->city}}</p>
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                     <div class="d-flex align-items-center mb-3">
@@ -88,9 +100,7 @@
                     {{$hotels->links('pagination::bootstrap-5') }}
                 </div>
 
-                <div class="text-center border-top pt-5">
-                    <a href="{{ route('admin.index') }}" class="btn btn-warning shadow-sm"> Admin</a>
-                </div>
+              
             </div>
         </section>
     </main>

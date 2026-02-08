@@ -14,17 +14,21 @@ class HotelController extends Controller
     public function index(Request $request)
     {
          
-        $hoteladdress =  Hotel::where('status','approved')->select("address")->get();
+        $Cities =  Hotel::where('status','approved')->select("city")->get();
 
         $hote = DB::table('hotels')->where('status', 'approved');
+         
+        if($request->filled('serch')){
+            $hote->where('name','like','%'.$request->serch .'%');
+        }
 
-        if ($request->address) {
-            $hote->where('address', $request->address);
+        if ($request->city) {
+            $hote->where('city', $request->city);
         }
 
         $hotels = $hote->paginate(6)->appends($request->query());
 
-        return view('hotels.index', compact('hotels', 'hoteladdress'));
+        return view('hotels.index', compact('hotels', 'Cities'));
     }
 
 
@@ -48,6 +52,7 @@ class HotelController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
             'description' => 'required',
             'address' => 'required|string|max:255'
         ]);
@@ -88,6 +93,7 @@ class HotelController extends Controller
        }
          $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
             'description' => 'required',
             'address' => 'required|string|max:255',
         ]);
