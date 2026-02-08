@@ -12,7 +12,7 @@ class Room extends Model
     {
         return $this->belongsToMany(Tag::class, 'rooms_tags');
     }
-    public function properties()
+    public function properties() 
     {
         return $this->belongsToMany(Property::class, 'rooms_properties');
     }

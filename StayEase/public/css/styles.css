@@ -10846,3 +10846,57 @@ html {
   background-repeat: no-repeat;
   min-height: 15rem;
 }
+
+.nv-body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f6f9;
+}
+
+.payment-container {
+    margin-top: 60px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.hotel-img {
+    height: 100%;
+    object-fit: cover;
+}
+.btn-routur{
+  display: relative;
+}
+.cgap-3{
+  margin-bottom: 20px;
+}
+.clr-donger{
+  background-color: red;
+  color: white;
+  font-style: bold;
+}
+.width-full{
+ width: 100%;
+}
+
+.total-box {
+     background: #f1f5ff;
+     border-radius: 12px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.btn-pay {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+     border-radius: 25px;
+    padding: 12px;
+}
+
+.btn-cancel {
+     border-radius: 25px;
+     padding: 12px;
+}
+    

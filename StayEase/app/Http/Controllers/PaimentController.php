@@ -12,7 +12,7 @@ class PaimentController extends Controller
      */
     public function index()
     {
-        //
+        return view('categories.paiment');
     }
 
     /**
@@ -28,7 +28,13 @@ class PaimentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valedate = $request->validate([
+            'price'=>'require',
+            'mode_paiment'=>'require',
+            'reservation_id'=>'require',
+        ]);
+        Paiment::created($valedate);
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -60,6 +66,7 @@ class PaimentController extends Controller
      */
     public function destroy(Paiment $paiment)
     {
-        //
+        $paiment->delete();
+        return back();
     }
 }
