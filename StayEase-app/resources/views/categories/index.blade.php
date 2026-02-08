@@ -98,7 +98,7 @@
                                             <form action="{{ route('categories.destroy', $category) }}" method="POST" onsubmit="return confirm('Safi tmse7?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger btn-sm px-3 border-0">
+                                                <button type="submit" onclick="return confirm('are you sure?')" class="btn btn-outline-danger btn-sm px-3 border-0">
                                                     <i class="bi bi-trash"></i> Delete
                                                 </button>
                                             </form>

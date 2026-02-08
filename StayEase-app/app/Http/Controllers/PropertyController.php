@@ -12,7 +12,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        return view('properties.index', ['properties' => Property::all()]);
+        return view('properties.create', ['properties' => Property::all()]);
     }
 
     /**

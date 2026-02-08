@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 
@@ -46,4 +47,5 @@ Route::post('/rooms/check-room', [ReservationController::class, 'index'])->name(
 Route::resource('tags', TagController::class);
 Route::resource('properties', PropertyController::class);
 Route::resource('categories', CategoryController::class);
+Route::resource('room/reservation/paiment', PaimentController::class);
 Route::resource('rooms', RoomController::class);
