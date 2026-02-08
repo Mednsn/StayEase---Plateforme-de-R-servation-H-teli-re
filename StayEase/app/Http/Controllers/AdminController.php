@@ -34,10 +34,9 @@ class AdminController extends Controller
         //
     }
 
-    public function edit(User $admin){
+    public function edit(){
 
-       $roles = Role::all();
-      return view('admin.edit',compact('admin','roles'));
+    
 
     }
 
@@ -45,17 +44,7 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update(Request $request,User $admin){
-
-      $validated = $request->validate([
-            'firstname' => 'required|max:255',
-            'lastname' => 'required|max:255',
-            'email' => 'required|max:255',
-            'role_id'=>'required|integer',
-        ]);
-        $admin->update($validated);
-
-      return redirect()->route('admin.getUsers');
+    public function update(Request $request){
 
     }
 
