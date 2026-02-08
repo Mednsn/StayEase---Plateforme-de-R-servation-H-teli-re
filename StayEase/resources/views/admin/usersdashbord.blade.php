@@ -76,7 +76,7 @@
                                         <td>
                                             <div class="d-flex gap-2 justify-content-center">
                                                 
-                                                    <a href="{{route("admin.edit",$user)}}"> <button type="submit" class="btn btn-success btn-sm px-3 shadow-sm border-0">
+                                                    <a href="{{route("user.edit",$user)}}"> <button type="submit" class="btn btn-success btn-sm px-3 shadow-sm border-0">
                                                         <i class="bi bi-check-circle me-1"></i> Update
                                                     </button></a>
 

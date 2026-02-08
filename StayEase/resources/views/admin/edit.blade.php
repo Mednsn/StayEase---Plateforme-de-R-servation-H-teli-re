@@ -18,23 +18,23 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('admin.update', $admin) }}" method="POST">
+                    <form action="{{ route('user.update', $user) }}" method="POST">
                         @csrf
                         @method('PUT')
 
                         <div class="mb-3">
                             <label for="firstname" class="form-label">Prénom</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" value="{{ $admin->firstname }}" required>
+                            <input type="text" class="form-control" id="firstname" name="firstname" value="{{ $user->firstname }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ $admin->lastname }}" required>
+                            <input type="text" class="form-control" id="lastname" name="lastname" value="{{ $user->lastname }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $admin->email }}" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                         </div>
 
                         <div class="mb-3">

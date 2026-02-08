@@ -78,11 +78,14 @@
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
                                     <h5 class="card-title mb-3 fw-bold">{{ $hotel->name }}</h5>
                                     <p class="card-text mb-0 text-muted small">{{ $hotel->description}}</p>
-                                    <p class="card-text mb-0 text-muted small">{{ $hotel->city}}</p>
+                                    <div >
+                                     <i class="bi bi-geo-alt text-danger me-2"></i>
+                                    <p class="card-text mb-0 text-muted small fw-bold text-muted">Ville : {{ $hotel->city}}</p>
+                                    </div>
+
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                     <div class="d-flex align-items-center mb-3">
-                                        <i class="bi bi-geo-alt text-danger me-2"></i>
                                         <div class="small fw-bold text-muted">{{ $hotel->address }}</div>
                                     </div>
                                     
