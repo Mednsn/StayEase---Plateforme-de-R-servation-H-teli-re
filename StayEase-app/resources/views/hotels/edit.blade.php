@@ -34,6 +34,16 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="city" class="form-label">Ville :</label>
+                            <input type="text" class="form-control" id="city" name="city" value="{{ $hotel->city }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Adresse :</label>
+                            <input type="text" class="form-control" id="address" name="address" value="{{ $hotel->address }}" required>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="address" class="form-label">Adresse :</label>
                             <input type="text" class="form-control" id="address" name="address" value="{{ $hotel->address }}" required>
                         </div>

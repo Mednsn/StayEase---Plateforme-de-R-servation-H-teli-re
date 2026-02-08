@@ -60,6 +60,7 @@
                                 <th>Nom</th>
                                 <th>Adresse</th>
                                 <th>description</th>
+                                <th>City</th>
                                 <th>Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -70,6 +71,7 @@
                                 <td class="fw-bold">{{ $hotel->name }}</td>
                                 <td>{{ $hotel->address }}</td>
                                 <td>{{ $hotel->description}}</td>
+                                <td>{{ $hotel->city}}</td>
                                 <td>{{ $hotel->status }} </td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">

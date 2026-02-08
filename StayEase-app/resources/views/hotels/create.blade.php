@@ -29,9 +29,14 @@
                 <textarea name="description" id="description" class="form-control" rows="4" placeholder="Décrivez l'hôtel..."></textarea>
             </div>
 
+              <div class="mb-3">
+                <label for="city" class="form-label fw-bold">Address :</label>
+                <input type="text" name="city" id="city" class="form-control"  required>
+            </div>
+
             <div class="mb-3">
                 <label for="address" class="form-label fw-bold">Adresse :</label>
-                <input type="text" name="address" id="address" class="form-control" placeholder="Ex: Rue 123, Ville" required>
+                <input type="text" name="address" id="address" class="form-control" placeholder="Ex: Rue 123" required>
             </div>
 
             <div class="d-grid gap-2 mt-4">
