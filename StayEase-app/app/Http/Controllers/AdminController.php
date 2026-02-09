@@ -26,12 +26,12 @@ class AdminController extends Controller
 {
     $request->validate([
         'status' => 'required|in:active,desactive',
-        'role_id' => 'required|exists:roles,id',
+        
     ]);
 
     $user->update([
         'status' => $request->status,
-        'role_id' => $request->role_id,
+       
     ]);
 
     return redirect()->back()->with('success', 'User updated successfully');
