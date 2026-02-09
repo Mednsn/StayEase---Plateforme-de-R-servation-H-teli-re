@@ -10,37 +10,31 @@
 <body class="bg-light">
 
     <div class="d-flex">
-        <div class="bg-dark text-white p-3 min-vh-100 d-none d-md-block" style="width: 250px;">
+       <aside class="bg-dark text-white p-3 min-vh-100 d-none d-md-block" style="width: 250px;">
             <div class="fs-5 fw-bold mb-4 text-center text-uppercase">
                 <i class="bi bi-emoji-laughing-fill me-2 text-warning"></i>Start Bootstrap
             </div>
             <hr class="text-secondary">
             
             <div class="nav flex-column gap-2">
-                <a href="{{ route('admin.index') }}" class="nav-link text-white small opacity-75">
+                <a href="{{ route('admin.index') }}" class="nav-link text-white small opacity-75 text-decoration-none p-2">
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
                 <div class="text-secondary small fw-bold text-uppercase mt-3 mb-1" style="font-size: 0.7rem;">Interface</div>
-                <a href="{{route('hotels.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between">
+                <a href="{{route('admin.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
                     <span><i class="bi bi-building me-2"></i> Hôtels</span>
-                    
                     <i class="bi bi-chevron-right small"></i>
                 </a>
-                 <a href="/users" class="nav-link text-white small opacity-75 d-flex justify-content-between">
-                    <span><i class="bi bi-building me-2"></i>User</span>
-                    
-                    <i class="bi bi-chevron-right small"></i>
+                <a href="{{route('categories.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
+                    <span><i class="bi bi-tags me-2"></i> Categories</span>
+                    <i class="bi bi-chevron-down small"></i>
                 </a>
-                <a href="{{route('categories.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between">
-                    <span><i class="bi bi-building me-2"></i> categories</span>
-                    <i class="bi bi-chevron-right small"></i>
-                </a>
-                <a href="{{route('admin.getUsers')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between">
-                    <span><i class="bi bi-building me-2"></i> Utilisateurs</span>
-                    <i class="bi bi-chevron-right small"></i>
+                <a href="{{route('admin.user')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
+                    <span><i class="bi bi-people me-2"></i> user</span>
+                    <i class="bi bi-chevron-down small"></i>
                 </a>
             </div>
-        </div>
+        </aside>
 
         <div class="flex-grow-1 p-4">
             
