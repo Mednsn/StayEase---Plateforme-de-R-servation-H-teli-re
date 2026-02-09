@@ -30,7 +30,6 @@ Route::get('/gerant/dashbord', [GerantController::class, 'index'])->name("gerant
 
 Route::post('/authentification/login', [UserController::class, 'login']);
 
-Route::get('/admin/usersdashbord', [AdminController::class, 'getUsers'])->name('admin.getUsers');
 
 
 
@@ -45,7 +44,7 @@ Route::get('/sincription', function () {
     return view('/authentification/regester');
 });
 
-    Route::get('/users', [AdminController::class, 'users']);
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.user');
     Route::put('/users/{user}', [AdminController::class, 'updateUserStatus'])->name('admin.users.update');
  
 Route::get('/longin', function () {
