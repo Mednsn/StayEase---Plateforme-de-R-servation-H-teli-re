@@ -38,7 +38,7 @@
              <a href="{{ route('hotels.create') }}" class="btn btn-primary shadow-sm">
                 <i class="bi bi-plus-circle me-1"></i> Créer un hôtel
             </a>
-            <a href="{{route('auth.logout')}}" class="btn btn-danger shadow-sm">LOGOUT</a>
+            <a href="{{route('user.logout')}}" class="btn btn-danger shadow-sm">LOGOUT</a>
         </div>
 
         <nav class="mb-4 bg-white p-3 rounded shadow-sm border">
