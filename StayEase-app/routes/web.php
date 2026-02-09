@@ -12,26 +12,13 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GerantController;
 
-
-
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::resource('authentification', UserController::class);
-Route::post('/authentification/login', [UserController::class,'login']);
-Route::post('/authentification/logout', [UserController::class,'destroy'])->name("auth.logout");
-
+ 
 Route::get('/gerant/dashbord', [GerantController::class , 'index'])->name("gerant.index");
 
 
 Route::post('/authentification/login', [UserController::class, 'login']);
 
 Route::get('/admin/usersdashbord',[AdminController::class,'getUsers'])->name('admin.getUsers');
-
 
 
 Route::resource('hotels', HotelController::class);

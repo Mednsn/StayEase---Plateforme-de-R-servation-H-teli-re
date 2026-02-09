@@ -36,6 +36,8 @@ class UserController extends Controller
     public function logout()
     {
 
+       auth::logout();
+        return redirect('/');
 
 
     }
@@ -44,101 +46,102 @@ class UserController extends Controller
     $credentials = $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-    ]);
-
-    if (Auth::attempt($credentials)) {
-
-        $request->session()->regenerate();
-
-        $user = Auth::user();
-
-        if ($user->status === 'desactive') {
-            Auth::logout();
-            return redirect('/')->withErrors([
-                'email' => 'Your account is deactivated'
-            ]);
-        }
-
-        if ($user->role->name === 'admin') {
-            return redirect('/admin');
-        }
-
-        return redirect('/');
-    }
-
-    return back()->withErrors([
+        ]);
+        
+        if (Auth::attempt($credentials)) {
+            
+            $request->session()->regenerate();
+            
+            $user = Auth::user();
+            
+            if ($user->status === 'desactive') {
+                Auth::logout();
+                return redirect('/')->withErrors([
+                    'email' => 'Your account is deactivated'
+                    ]);
+                    }
+                    
+                    if ($user->role->name === 'admin') {
+                        return redirect('/admin');
+                        }
+                        
+                        return redirect('/');
+                        }
+                        
+                        return back()->withErrors([
         'email' => 'The provided credentials do not match our records.',
     ])->onlyInput('email');
 }
 
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $id = Role::find($request['role_id']);
-        if ($id['name'] == 'gerant') {
+/**
+ * Store a newly created resource in storage.
+*/
+public function store(Request $request)
+{
+    $id = Role::find($request['role_id']);
+    if ($id['name'] == 'gerant') {
             $request['status'] = 'desactive';
         } else {
             $request['status'] = 'active';
-        }
-        $validated = $request->validate([
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
-            'email' => 'required|string',
-            'password' => 'required|string|min:8',
-            'role_id' => 'required',
-            'status' => 'required',
-        ]);
-        User::create($validated);
-        return view('/welcome');
-    }
-
-    /**
+            }
+            $validated = $request->validate([
+                'firstname' => 'required|string',
+                'lastname' => 'required|string',
+                'email' => 'required|string',
+                'password' => 'required|string|min:8',
+                'role_id' => 'required',
+                'status' => 'required',
+                ]);
+                User::create($validated);
+                return view('/welcome');
+                }
+                
+                /**
      * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-     public function edit(User $user){
-
-       $roles = Role::all();
-      return view('admin.edit',compact('user','roles'));
-
-    }
-
-
+                */
+                public function show(string $id)
+                {
+                    //
+                    }
+                    
+                    /**
+                     * Show the form for editing the specified resource.
+                    */
+                    public function edit(User $user){
+                        
+                        $roles = Role::all();
+                        return view('admin.edit',compact('user','roles'));
+                        
+                        }
+                        
+                        
     /**
      * Update the specified resource in storage.
-     */
+    */
+    
+    public function update(Request $request,User $user){
 
-     public function update(Request $request,User $user){
-
-      $validated = $request->validate([
+        $validated = $request->validate([
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
             'email' => 'required|max:255',
             'role_id'=>'required|integer',
-        ]);
-        $user->update($validated);
+            ]);
+            $user->update($validated);
 
       return redirect()->route('admin.getUsers');
 
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        auth::logout();
-        return redirect('/');
-    }
-}
+      }
+      
+      
+      /**
+       * Remove the specified resource from storage.
+      */
+      public function destroy(User $user)
+      {
+           $user->delete();
+          return redirect()->route('admin.getUsers');
+        }
+        }
+        

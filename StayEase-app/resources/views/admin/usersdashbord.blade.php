@@ -80,7 +80,7 @@
                                                         <i class="bi bi-check-circle me-1"></i> Update
                                                     </button></a>
 
-                                                <form action="{{ route('admin.destroy', $user) }}" method="POST">
+                                                <form action="{{ route('user.destroy', $user) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm px-3 shadow-sm border-0">
