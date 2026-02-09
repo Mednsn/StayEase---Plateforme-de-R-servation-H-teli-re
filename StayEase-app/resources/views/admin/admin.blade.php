@@ -23,6 +23,12 @@
                 <div class="text-secondary small fw-bold text-uppercase mt-3 mb-1" style="font-size: 0.7rem;">Interface</div>
                 <a href="{{route('hotels.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between">
                     <span><i class="bi bi-building me-2"></i> Hôtels</span>
+                    
+                    <i class="bi bi-chevron-right small"></i>
+                </a>
+                 <a href="/users" class="nav-link text-white small opacity-75 d-flex justify-content-between">
+                    <span><i class="bi bi-building me-2"></i>User</span>
+                    
                     <i class="bi bi-chevron-right small"></i>
                 </a>
                 <a href="{{route('categories.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between">

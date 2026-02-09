@@ -20,7 +20,7 @@ use App\Http\Controllers\GerantController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::post('/authentification/logout', [UserController::class,'logout'])->name("user.logout");
 Route::resource('authentification', UserController::class);
 Route::post('/authentification/login', [UserController::class, 'login']);
 Route::post('/authentification/logout', [UserController::class, 'destroy'])->name("auth.logout");
@@ -45,6 +45,9 @@ Route::get('/sincription', function () {
     return view('/authentification/regester');
 });
 
+    Route::get('/users', [AdminController::class, 'users']);
+    Route::put('/users/{user}', [AdminController::class, 'updateUserStatus'])->name('admin.users.update');
+ 
 Route::get('/longin', function () {
     return view('/authentification/connection');
 });
