@@ -54,12 +54,12 @@
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
                             <form action="/authentification/login " method="post">
+                                @csrf
                                 @if (session('error'))
                                     <div class="alert alert-danger">
                                         {{ session('error') }}
                                     </div>
                                 @endif
-                                @csrf
                                 @method('post')
                                 <!-- Email address input-->
                                 <div class="form-floating mb-3">

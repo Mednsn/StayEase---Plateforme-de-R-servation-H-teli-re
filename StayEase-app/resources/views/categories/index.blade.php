@@ -29,8 +29,8 @@
                     <span><i class="bi bi-tags me-2"></i> Categories</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <a href="{{route('admin.getUsers')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
-                    <span><i class="bi bi-people me-2"></i> Utilisateurs</span>
+                <a href="{{route('admin.user')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
+                    <span><i class="bi bi-people me-2"></i> user</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
             </div>

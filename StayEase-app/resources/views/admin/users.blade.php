@@ -12,32 +12,31 @@
 <body class="bg-light">
 
     <div class="d-flex">
-        <div class="bg-dark text-white p-3 min-vh-100 d-none d-md-block" style="width: 250px;">
+        <aside class="bg-dark text-white p-3 min-vh-100 d-none d-md-block" style="width: 250px;">
             <div class="fs-5 fw-bold mb-4 text-center text-uppercase">
                 <i class="bi bi-emoji-laughing-fill me-2 text-warning"></i>Start Bootstrap
             </div>
             <hr class="text-secondary">
-
+            
             <div class="nav flex-column gap-2">
-                <a href="{{ route('admin.index') }}" class="nav-link text-white small opacity-75">
+                <a href="{{ route('admin.index') }}" class="nav-link text-white small opacity-75 text-decoration-none p-2">
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
-                <div class="text-secondary small fw-bold text-uppercase mt-3 mb-1" style="font-size: 0.7rem;">Interface
-                </div>
-                <a href="{{route('hotels.index')}}"
-                    class="nav-link text-white small opacity-75 d-flex justify-content-between">
+                <div class="text-secondary small fw-bold text-uppercase mt-3 mb-1" style="font-size: 0.7rem;">Interface</div>
+                <a href="{{route('admin.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
                     <span><i class="bi bi-building me-2"></i> Hôtels</span>
-
                     <i class="bi bi-chevron-right small"></i>
                 </a>
-                <a href="{{route('hotels.index')}}"
-                    class="nav-link text-white small opacity-75 d-flex justify-content-between">
-                    <span><i class="bi bi-building me-2"></i>User</span>
-
-                    <i class="bi bi-chevron-right small"></i>
+                <a href="{{route('categories.index')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
+                    <span><i class="bi bi-tags me-2"></i> Categories</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <a href="{{route('admin.user')}}" class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2">
+                    <span><i class="bi bi-people me-2"></i> user</span>
+                    <i class="bi bi-chevron-down small"></i>
                 </a>
             </div>
-        </div>
+        </aside>
 
         <div class="flex-grow-1 p-4">
 
@@ -68,7 +67,8 @@
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Role</th>
-                                    <th class="text-center">Actions</th>
+                                    <th class="text-center">Validation</th>
+                                    <th class="text-center">action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,17 +95,27 @@
                                                         Active</option>
                                                     <option value="desactive" {{ $user->status == 'desactive' ? 'selected' : '' }}>Desactive</option>
                                                 </select>
-                                                <select name="role_id" class="form-select form-select-sm">
-                                                    @foreach(\App\Models\Role::all() as $role)
-                                                        <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
-                                                            {{ $role->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                                
                                                 <button type="submit" class="btn btn-primary btn-sm px-3">
-                                                    <i class="bi bi-pencil-square"></i> Update
+                                                     <i class="bi bi-check-circle me-1"></i>
                                                 </button>
                                             </form>
+                                        </td><td>
+                                            <div class="d-flex gap-2 justify-content-center">
+                                                
+                                                    <a href="{{route("user.edit",$user)}}"> <button type="submit" class="btn btn-success btn-sm px-3 shadow-sm border-0">
+                                                       
+                                                        <i class="bi bi-pencil-square"></i> Update
+                                                    </button></a>
+
+                                                <form action="{{ route('user.destroy', $user) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm px-3 shadow-sm border-0">
+                                                        <i class="bi bi-x-circle me-1"></i> DELETE
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
