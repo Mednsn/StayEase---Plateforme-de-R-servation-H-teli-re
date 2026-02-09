@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Paiment extends Model
 {
-    protected $fillable = ['price_paiment','reservation_id'];
+    protected $fillable = ['price_paiment','reservation_id','mode_paiement'];
 
     public function reservation()
     {
