@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hotel;
-use App\Models\Role;
 use App\Models\User;
-
 
 class AdminController extends Controller
 {
@@ -15,16 +13,30 @@ class AdminController extends Controller
      */
     public function index()
     {
-         $hotels = Hotel::where('status','pending')->with('user')->get();
-         return view('admin.admin', compact('hotels'));
+        $hotels = Hotel::where('status', 'pending')->with('user')->get();
+        return view('admin.admin', compact('hotels'));
 
     }
-
-    public function getUsers(){
-        $users = User::with('role')->get();
-        
-        return view('admin.usersdashbord',compact('users'));
+    public function users()
+    {
+        $users = User::with('role')->get(); 
+        return view('admin.users', compact('users'));
     }
+    public function updateUserStatus(Request $request, User $user)
+{
+    $request->validate([
+        'status' => 'required|in:active,desactive',
+        'role_id' => 'required|exists:roles,id',
+    ]);
+
+    $user->update([
+        'status' => $request->status,
+        'role_id' => $request->role_id,
+    ]);
+
+    return redirect()->back()->with('success', 'User updated successfully');
+}
+
 
     /**
      * Display the specified resource.
@@ -57,16 +69,13 @@ class AdminController extends Controller
 
     }
 
-   public function reject(Hotel $hotel)
-   {
+    public function reject(Hotel $hotel)
+    {
 
-        $hotel->update(['status'=>'rejected']);
+        $hotel->update(['status' => 'rejected']);
         return redirect()->route('admin.index');
 
 
    }
 
-   public function destroy(User $user){
-   
-   }
 }

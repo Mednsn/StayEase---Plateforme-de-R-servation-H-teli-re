@@ -32,13 +32,17 @@
     </div>
 
     <div class="flex-grow-1 p-4">
-
+         <nav class="navbar navbar-light mb-4">
+        
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h3 fw-bold text-secondary">Mes Hôtels</h1>
              <a href="{{ route('hotels.create') }}" class="btn btn-primary shadow-sm">
                 <i class="bi bi-plus-circle me-1"></i> Créer un hôtel
             </a>
-            <a href="{{route('auth.logout')}}" class="btn btn-danger shadow-sm">LOGOUT</a>
+            <div class="container">
+              <a href="{{ route('rooms.create', ['hotel_id' => request('hotel_id')]) }}" class="btn btn-light">+ Ajouter chombre</a>
+           </div>
+            <a href="{{route('user.logout')}}" class="btn btn-danger shadow-sm">LOGOUT</a>
         </div>
 
         <nav class="mb-4 bg-white p-3 rounded shadow-sm border">

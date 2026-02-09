@@ -46,32 +46,37 @@ class UserController extends Controller
     $credentials = $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-        ]);
-        
+    ]);
+
         if (Auth::attempt($credentials)) {
-            
+
             $request->session()->regenerate();
-            
+
             $user = Auth::user();
-            
+            $role = $user->role->name;
+            // dd($user->status);
+
             if ($user->status === 'desactive') {
                 Auth::logout();
-                return redirect('/')->withErrors([
-                    'email' => 'Your account is deactivated'
-                    ]);
-                    }
-                    
-                    if ($user->role->name === 'admin') {
-                        return redirect('/admin');
-                        }
-                        
-                        return redirect('/');
-                        }
-                        
-                        return back()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
-    ])->onlyInput('email');
-}
+                return redirect()->back()->with('error', 'Your account is not active yet. Please contact the admin.');
+            }
+
+            if ($role === 'admin') {
+                return redirect('/admin');
+            }
+            else if($role === 'gerant'){
+                return redirect()->route('gerant.index');
+            }
+           else{
+             return redirect('/hotels');
+
+           }
+
+           
+        }
+
+        return back()->with('error', 'Your account or the password not correct');
+    }
 
 
 /**
@@ -130,18 +135,16 @@ public function store(Request $request)
             ]);
             $user->update($validated);
 
-      return redirect()->route('admin.getUsers');
+      return redirect()->route('admin.user');
 
-      }
-      
-      
-      /**
-       * Remove the specified resource from storage.
-      */
-      public function destroy(User $user)
-      {
-           $user->delete();
-          return redirect()->route('admin.getUsers');
-        }
-        }
-        
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     */
+   public function destroy(User $user){
+      $user->delete();
+     return redirect()->route('admin.user');
+   }
+}
