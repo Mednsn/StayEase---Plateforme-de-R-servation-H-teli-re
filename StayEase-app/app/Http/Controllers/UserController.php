@@ -35,7 +35,9 @@ class UserController extends Controller
     }
     public function logout()
     {
-
+       
+          auth::logout();
+        return redirect('/');
 
 
     }
@@ -62,9 +64,15 @@ class UserController extends Controller
             if ($role === 'admine') {
                 return redirect('/admin');
             }
+            else if($role === 'gerant'){
+                return redirect()->route('gerant.index');
+            }
+           else{
+             return redirect('/hotels');
 
+           }
 
-            return redirect('/');
+           
         }
 
         return back()->with('error', 'Your account or the password not correct');
@@ -137,7 +145,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        auth::logout();
-        return redirect('/');
+        
     }
 }

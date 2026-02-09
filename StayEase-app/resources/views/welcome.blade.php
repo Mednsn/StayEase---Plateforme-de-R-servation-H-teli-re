@@ -31,10 +31,9 @@
                         <li class="nav-item"><a class="nav-link" href="{{route('hotels.index')}}">Hôtel</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                         @auth
-                            <form action="/authentification/logout" method="post">
+                            <form action="{{route('user.logout')}}" method="post">
                                 @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-lg px-4 me-sm-3">log out</button></li>
+                                <button class="btn btn-danger btn-lg px-4 me-sm-3">log out</button>
                             </form>
                         @endauth
                     </ul>
