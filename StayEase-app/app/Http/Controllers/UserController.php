@@ -46,30 +46,29 @@ class UserController extends Controller
         'password' => 'required',
     ]);
 
-    if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
 
-        $request->session()->regenerate();
+            $request->session()->regenerate();
 
-        $user = Auth::user();
+            $user = Auth::user();
+            $role = $user->role->name;
+            // dd($user->status);
 
-        if ($user->status === 'desactive') {
-            Auth::logout();
-            return redirect('/')->withErrors([
-                'email' => 'Your account is deactivated'
-            ]);
+            if ($user->status === 'desactive') {
+                Auth::logout();
+                return redirect()->back()->with('error', 'Your account is not active yet. Please contact the admin.');
+            }
+
+            if ($role === 'admine') {
+                return redirect('/admin');
+            }
+
+
+            return redirect('/');
         }
 
-        if ($user->role->name === 'admin') {
-            return redirect('/admin');
-        }
-
-        return redirect('/');
+        return back()->with('error', 'Your account or the password not correct');
     }
-
-    return back()->withErrors([
-        'email' => 'The provided credentials do not match our records.',
-    ])->onlyInput('email');
-}
 
 
     /**

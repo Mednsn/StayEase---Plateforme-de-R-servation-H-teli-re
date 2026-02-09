@@ -45,6 +45,9 @@ Route::get('/sincription', function () {
     return view('/authentification/regester');
 });
 
+    Route::get('/users', [AdminController::class, 'users']);
+    Route::put('/users/{user}', [AdminController::class, 'updateUserStatus'])->name('admin.users.update');
+ 
 Route::get('/longin', function () {
     return view('/authentification/connection');
 });
