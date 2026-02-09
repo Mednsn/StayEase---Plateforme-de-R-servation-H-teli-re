@@ -37,11 +37,6 @@ class AdminController extends Controller
     return redirect()->back()->with('success', 'User updated successfully');
 }
 
-    public function getUsers(){
-        $users = User::with('role')->get();
-        
-        return view('admin.usersdashbord',compact('users'));
-    }
 
     /**
      * Display the specified resource.
