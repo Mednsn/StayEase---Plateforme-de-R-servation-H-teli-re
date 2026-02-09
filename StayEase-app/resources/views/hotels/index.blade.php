@@ -11,11 +11,13 @@
     <main class="flex-shrink-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container px-5">
-                <a class="navbar-brand" href="/">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
+                <a class="navbar-brand" href="index.html">StayEase</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -26,14 +28,25 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <form action="{{ route('hotels.index') }}" method="GET" class="card p-4 shadow border-0">
+                                <div class="row align-items-end g-3">
+                                <div class="col-md-9">
+                                    <label class="form-label fw-bold text-muted small text-uppercase" >Name of Hotel</label>
+                                     <input type="text" name="serch" class= "form-control bg-light" placeholder= "name hotel">
+                                  </div>
+                                  <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary w-100 fw-bold">
+                                        <i class="bi bi-filter"></i> Search
+                                    </button>
+                                </div>
+                                 </div>
                             <div class="row align-items-end g-3">
                                 <div class="col-md-9">
                                     <label class="form-label fw-bold text-muted small text-uppercase">Filter by City</label>
-                                    <select name="address" class="form-select border-0 bg-light">
+                                    <select name="city" class="form-select border-0 bg-light">
                                         <option value="">All Cities</option>
-                                        @foreach($hoteladdress as $hotel)
-                                            <option value="{{$hotel->address}}">
-                                                {{$hotel->address}}
+                                        @foreach($hotels as $hotel)
+                                            <option value="{{$hotel->city}}">
+                                                {{$hotel->city}}
                                             </option>
                                         @endforeach
                                     </select>
@@ -65,10 +78,14 @@
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
                                     <h5 class="card-title mb-3 fw-bold">{{ $hotel->name }}</h5>
                                     <p class="card-text mb-0 text-muted small">{{ $hotel->description}}</p>
+                                    <div >
+                                     <i class="bi bi-geo-alt text-danger me-2"></i>
+                                    <p class="card-text mb-0 text-muted small fw-bold text-muted">Ville : {{ $hotel->city}}</p>
+                                    </div>
+
                                 </div>
                                 <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                     <div class="d-flex align-items-center mb-3">
-                                        <i class="bi bi-geo-alt text-danger me-2"></i>
                                         <div class="small fw-bold text-muted">{{ $hotel->address }}</div>
                                     </div>
                                     
@@ -86,9 +103,7 @@
                     {{$hotels->links('pagination::bootstrap-5') }}
                 </div>
 
-                <div class="text-center border-top pt-5">
-                    <a href="{{ route('admin.index') }}" class="btn btn-warning shadow-sm"> Admin</a>
-                </div>
+              
             </div>
         </section>
     </main>

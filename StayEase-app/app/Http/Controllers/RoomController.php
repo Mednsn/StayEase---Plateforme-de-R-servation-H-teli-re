@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Room;
+use App\Models\Tag;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -12,16 +15,34 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        $rooms = Room::with('tags', 'properties')->where('hotel_id', $request->hotel_id)->get();
-        return view('rooms.index', compact('rooms'));
+        $query = Room::with('tags', 'properties');
+
+        if ($tagId = $request->get('tag')) {
+            $query->whereHas('tags', fn($q) => $q->where('tags.id', $tagId));
+        }
+
+        if ($propertyId = $request->get('property')) {
+            $query->whereHas('properties', fn($q) => $q->where('properties.id', $propertyId));
+        }
+
+        $rooms = $query->get();
+        $allTags = Tag::all();
+        $allProperties = Property::all();
+
+        return view('rooms.index', compact('rooms', 'allTags', 'allProperties'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('rooms.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        $properties = Property::all();
+        return view('rooms.create', compact('tags', 'properties', 'categories'));
     }
 
     /**
@@ -30,12 +51,13 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'hotel_id' => 'required|integer',
-            'number' => 'required|string',
-            'price_per_night' => 'required|numeric|min:0',
-            'capacity' => 'required|integer|min:1',
-            'description' => 'nullable|string',
+            'hotel_id' => 'required',
+            'number' => 'required',
+            'price_per_night' => 'required',
+            'capacity' => 'required',
+            'description' => 'nullable',
         ]);
+
         $room = Room::create($validated);
         $room->tags()->sync($request->get('tags', []));
         $room->properties()->sync($request->get('properties', []));
@@ -47,9 +69,10 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        $room->load('tags', 'properties')->with('hotels');
+        $room->load('tags', 'properties', 'hotel');
         return view('rooms.show', compact('room'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

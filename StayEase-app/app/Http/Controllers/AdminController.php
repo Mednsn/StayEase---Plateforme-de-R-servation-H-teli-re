@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
     public function users()
     {
-        $users = User::with('role')->get(); // جلب جميع المستخدمين مع الدور ديالهم
+        $users = User::with('role')->get(); 
         return view('admin.users', compact('users'));
     }
     public function updateUserStatus(Request $request, User $user)
@@ -37,6 +37,12 @@ class AdminController extends Controller
     return redirect()->back()->with('success', 'User updated successfully');
 }
 
+    public function getUsers(){
+        $users = User::with('role')->get();
+        
+        return view('admin.usersdashbord',compact('users'));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -45,11 +51,22 @@ class AdminController extends Controller
         //
     }
 
+    public function edit(){
 
+    
+
+    }
 
     /**
      * Update the specified resource in storage.
      */
+
+    public function update(Request $request){
+
+    }
+
+
+
     public function approve(Hotel $hotel)
     {
         $hotel->update(['status' => 'approved']);
@@ -64,5 +81,10 @@ class AdminController extends Controller
         return redirect()->route('admin.index');
 
 
-    }
+   }
+
+   public function destroy(User $admin){
+      $admin->delete();
+     return redirect()->route('admin.getUsers');
+   }
 }

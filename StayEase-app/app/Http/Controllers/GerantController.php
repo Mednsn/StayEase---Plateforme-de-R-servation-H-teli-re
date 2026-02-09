@@ -1,18 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
-use App\Models\Property;
+
 use Illuminate\Http\Request;
+use App\Models\Hotel;
 
-class PropertyController extends Controller
+class GerantController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('properties.create', ['properties' => Property::all()]);
+       $user = Auth::user();
+
+       if(!Auth::check() ){
+         return view('authentification.connection');
+       }
+       if( $user->role->name !="gerant"){
+         return view('authentification.connection');
+       }
+
+        $hotels = Hotel::where("user_id",Auth::id())->get();
+        return view("gerant.dashbord",compact('hotels'));
     }
 
     /**
@@ -20,7 +32,7 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        return view('properties.create');
+        //
     }
 
     /**
@@ -28,12 +40,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:50',
-            'icon' => 'required'
-        ]);
-        Property::create($validated);
-        return redirect()->route('properties.index');
+        //
     }
 
     /**
@@ -63,9 +70,8 @@ class PropertyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Property $property)
+    public function destroy(string $id)
     {
-        $property->delete();
-        return redirect()->route('properties.index');
+        //
     }
 }

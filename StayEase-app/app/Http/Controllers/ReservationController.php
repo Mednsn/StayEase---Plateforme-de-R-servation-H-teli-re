@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -21,14 +22,21 @@ class ReservationController extends Controller
         $date_in = $request->check_in;
         $date_out = $request->check_out;
 
-        $rooms_disponible = DB::table('rooms')
-            ->leftJoin('reservations', 'rooms.id', '=', 'reservations.room_id')
-            ->select('rooms.*', 'reservations.check_in','reservations.check_out')
-            ->where('check_out', '>', $request->check_in)
-            ->where('check_in', '>', $request->check_out)
-            ->get();
+        $checkin  = new DateTime($date_in);
+        $checkout = new DateTime($date_out);
 
-        dd($rooms_disponible);
+        $nbrJours = $checkout->diff($checkin)->days;
+
+        $rooms_disponible = DB::table('rooms')
+            ->whereNotIn('id', function ($join) use ($date_in, $date_out) {
+                $join->select('room_id')
+                ->from('reservations')
+                ->where('check_in', '<', $date_out)
+                ->where('check_out', '>', $date_in);
+            })->get();
+
+
+        // dd($rooms_disponible);
 
         return view('categories.checkRooms', compact('rooms_disponible', 'date_in', 'date_out'));
     }
@@ -46,7 +54,17 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'name' => 'require | max:255',
+            'check_in' => 'require',
+            'check_out' => 'require',
+            'user_id' => 'require',
+            'room_id' => 'require',
+        ]);
+        Reservation::created($validated);
+
+        return back();
     }
 
     /**
@@ -70,7 +88,16 @@ class ReservationController extends Controller
      */
     public function update(Request $request, Reservation $reservation)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'require | max:255',
+            'check_in' => 'require',
+            'check_out' => 'require',
+            'user_id' => 'require',
+            'room_id' => 'require',
+        ]);
+        $reservation->update($validated);
+
+        return back();
     }
 
     /**
@@ -78,6 +105,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return back();
     }
 }

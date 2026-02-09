@@ -17,10 +17,10 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company() . ' Hotel',
-            'address' => fake()->city(),
+            'name' => fake()->company() . 'Hotel',
+            'address' => fake()->address(),
+            'city' => fake()->city(),
             'description' => fake()->paragraph(2),
-            // Hna katzid l-id dyal user
             'user_id' => \App\Models\User::factory(), 
         ];
     }

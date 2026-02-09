@@ -40,11 +40,11 @@ class UserController extends Controller
 
     }
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
         if (Auth::attempt($credentials)) {
 
@@ -105,18 +105,32 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+     public function edit(User $user){
+
+       $roles = Role::all();
+      return view('admin.edit',compact('user','roles'));
+
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+
+     public function update(Request $request,User $user){
+
+      $validated = $request->validate([
+            'firstname' => 'required|max:255',
+            'lastname' => 'required|max:255',
+            'email' => 'required|max:255',
+            'role_id'=>'required|integer',
+        ]);
+        $user->update($validated);
+
+      return redirect()->route('admin.getUsers');
+
     }
+
 
     /**
      * Remove the specified resource from storage.
