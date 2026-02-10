@@ -25,13 +25,12 @@ Route::post('/authentification/logout', [UserController::class, 'logout'])->name
 Route::resource('authentification', UserController::class);
 Route::post('/authentification/login', [UserController::class, 'login']);
 Route::middleware('gerant')->group(function(){
-
+Route::get('/gerant/chombre', [GerantController::class, 'chombre'])->name("gerant.chombre");
     Route::get('/gerant/dashbord', [GerantController::class, 'index'])->name("gerant.index");
 });
 
 
 Route::post('/authentification/login', [UserController::class, 'login']);
-
 
 
 
@@ -65,5 +64,5 @@ Route::post('/rooms/check-room', [ReservationController::class, 'index'])->name(
 Route::resource('tags', TagController::class);
 Route::resource('properties', PropertyController::class);
 Route::resource('categories', CategoryController::class);
-Route::resource('room/reservation/paiment', PaimentController::class);
 Route::resource('rooms', RoomController::class);
+Route::resource('room/reservation/paiment', PaimentController::class);

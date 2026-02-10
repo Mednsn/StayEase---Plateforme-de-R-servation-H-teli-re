@@ -35,8 +35,8 @@ class UserController extends Controller
     }
     public function logout()
     {
-       
-          auth::logout();
+
+       auth::logout();
         return redirect('/');
 
 
@@ -82,13 +82,14 @@ class UserController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $id = Role::find($request['role_id']);
-        if ($id['name'] == 'gerant') {
+/**
+ * Store a newly created resource in storage.
+*/
+public function store(Request $request)
+{
+    $id = Role::find($request['role_id']);
+   
+    if ($id['name'] == 'gerant') {
             $request['status'] = 'desactive';
         } else {
             $request['status'] = 'active';
@@ -107,36 +108,36 @@ class UserController extends Controller
                        
     /**
      * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-     public function edit(User $user){
-
-       $roles = Role::all();
-      return view('admin.edit',compact('user','roles'));
-
-    }
-
-
+                */
+                public function show(string $id)
+                {
+                    //
+                    }
+                    
+                    /**
+                     * Show the form for editing the specified resource.
+                    */
+                    public function edit(User $user){
+                        
+                        $roles = Role::all();
+                        return view('admin.edit',compact('user','roles'));
+                        
+                        }
+                        
+                        
     /**
      * Update the specified resource in storage.
-     */
+    */
+    
+    public function update(Request $request,User $user){
 
-     public function update(Request $request,User $user){
-
-      $validated = $request->validate([
+        $validated = $request->validate([
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
             'email' => 'required|max:255',
             'role_id'=>'required|integer',
-        ]);
-        $user->update($validated);
+            ]);
+            $user->update($validated);
 
       return redirect()->route('admin.user');
 

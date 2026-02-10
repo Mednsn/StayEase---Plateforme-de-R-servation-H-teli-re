@@ -75,11 +75,18 @@
                         @endforeach
                     </select>
                 </div>
-                <input type="hidden" name="hotel_id" value="{{ request('hotel_id') }}">
+                 <div class="mb-3">
+                    <label>hotels</label>
+                    <select name="hotel_id" class="form-select" >
+                        @foreach($hotels as $hotel)
+                            <option value="{{ $hotel->id }}">{{ $hotel->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
-                    <a href="{{ route('rooms.index', ['hotel_id' => request('hotel_id')]) }}" class="btn btn-secondary">Annuler</a>
+                    <a href="{{ route('gerant.index')}}" class="btn btn-secondary">Annuler</a>
                 </div>
 
             </form>
