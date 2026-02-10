@@ -12,7 +12,7 @@
     <div class="d-flex">
        <aside class="bg-dark text-white p-3 min-vh-100 d-none d-md-block" style="width: 250px;">
             <div class="fs-5 fw-bold mb-4 text-center text-uppercase">
-                <i class="bi bi-emoji-laughing-fill me-2 text-warning"></i>Start Bootstrap
+                <i class="bi bi-emoji-laughing-fill me-2 text-warning"></i>StayEase
             </div>
             <hr class="text-secondary">
             

@@ -30,7 +30,7 @@
                 <i class="bi bi-building me-2"></i> Mes Hôtels
             </a>
             <a href="{{ route('gerant.chombre') }}" class="nav-link text-white small opacity-75">
-                 <i class="bi bi-building me-2"></i> Chombres
+                 <i class="bi bi-building me-2"></i> Chambres
             </a>
         </div>
     </div>
