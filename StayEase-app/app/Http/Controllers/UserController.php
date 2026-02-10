@@ -62,7 +62,10 @@ class UserController extends Controller
             }
 
             if ($role === 'admin') {
-                return redirect('/admin');
+                // dd($role);
+                
+                return redirect()->route('admin.index');
+                
             }
             else if($role === 'gerant'){
                 return redirect()->route('gerant.index');

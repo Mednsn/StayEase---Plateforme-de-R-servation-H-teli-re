@@ -20,10 +20,12 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::with('role')->get(); 
+        // dd($users);
         return view('admin.users', compact('users'));
     }
     public function updateUserStatus(Request $request, User $user)
-{
+{ 
+    // dd($re   quest);
     $request->validate([
         'status' => 'required|in:active,desactive',
         

@@ -22,11 +22,11 @@ class adminmiddleware
         }
         $user = auth::user();
         // dd($user->role->name);
-        if($user->role->name ==='admin'){
-            return redirect()->route('admin.user');
+        if($user->role->name !='admin'){
+           return redirect('/longin');
         }
 
-        dd($user);
+        // dd($user);
         return $next($request);
     }
 }
