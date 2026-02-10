@@ -61,7 +61,7 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'Your account is not active yet. Please contact the admin.');
             }
 
-            if ($role === 'admine') {
+            if ($role === 'admin') {
                 return redirect('/admin');
             }
             else if($role === 'gerant'){
@@ -101,7 +101,7 @@ class UserController extends Controller
         User::create($validated);
         return view('/welcome');
     }
-
+                       
     /**
      * Display the specified resource.
      */
