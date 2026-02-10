@@ -29,8 +29,10 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('hotels.index')}}">Hôtel</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                      
                         @auth
+                        <li class="nav-item"><a class="nav-link" href="{{route('user.profile')}}">profile</a></li>
+
                             <form action="{{route('user.logout')}}" method="post">
                                 @csrf
                                 <button class="btn btn-danger btn-lg px-4 me-sm-3">log out</button>

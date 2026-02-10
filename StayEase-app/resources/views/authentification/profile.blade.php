@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>User Profile - StayEase</title>
 
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="../css/styles.css"  rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 
@@ -43,12 +43,12 @@
                 <!-- Info -->
                 <div class="col-lg-8">
                     <h1 class="text-white fw-bold mb-3">
-                        {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                        {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}
                     </h1>
 
                     <ul class="list-unstyled text-white-50 fs-5">
                         <li><strong>Email:</strong> {{ auth()->user()->email }}</li>
-                        <li><strong>Role:</strong> {{ auth()->user()->role }}</li>
+                        <li><strong>Role:</strong> {{ auth()->user()->role->name }}</li>
                         <li>
                             <strong>Status:</strong>
                             <span class="badge bg-{{ auth()->user()->status === 'active' ? 'success' : 'secondary' }}">
