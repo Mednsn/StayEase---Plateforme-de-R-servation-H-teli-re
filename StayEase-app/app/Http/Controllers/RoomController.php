@@ -85,9 +85,17 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Room $room)
     {
-        //
+        $request -> validate([
+            'hotel_id' => 'required',
+            'number' => 'required',
+            'price_per_night' => 'required',
+            'capacity' => 'required',
+            'description' => 'nullable',
+        ]);
+        $room ->update($request->all());
+        return redirect()->route('rooms.index');
     }
 
     /**
