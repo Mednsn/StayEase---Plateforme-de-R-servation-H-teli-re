@@ -20,12 +20,14 @@ use App\Http\Controllers\GerantController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('/authentification/logout', [UserController::class,'logout'])->name("user.logout");
+
+Route::post('/authentification/logout', [UserController::class, 'logout'])->name("user.logout");
 Route::resource('authentification', UserController::class);
 Route::post('/authentification/login', [UserController::class, 'login']);
-
+Route::middleware('gerant')->group(function(){
 Route::get('/gerant/chombre', [GerantController::class, 'chombre'])->name("gerant.chombre");
-Route::get('/gerant/dashbord', [GerantController::class, 'index'])->name("gerant.index");
+    Route::get('/gerant/dashbord', [GerantController::class, 'index'])->name("gerant.index");
+});
 
 
 Route::post('/authentification/login', [UserController::class, 'login']);
@@ -33,9 +35,16 @@ Route::post('/authentification/login', [UserController::class, 'login']);
 
 
 Route::resource('hotels', HotelController::class);
-Route::put('/admin/{hotel}/approve', [AdminController::class, 'approve'])->name('admin.approve');
-Route::put('/admin/{hotel}/reject', [AdminController::class, 'reject'])->name('admin.reject');
-Route::resource('admin', AdminController::class);
+
+route::middleware('admin', )->group(function () {
+    Route::put('/admin/{hotel}/approve', [AdminController::class, 'approve'])->name('admin.approve');
+    Route::put('/admin/{hotel}/reject', [AdminController::class, 'reject'])->name('admin.reject');
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.user');
+    Route::put('/users/{user}/update', [AdminController::class, 'updateUserStatus'])->name('admin.users.update');
+    Route::get('/admin/index',[AdminController::class,'index'])->name('admin.index');
+    // Route::resource('admin', AdminController::class);
+    
+    });
 Route::resource('user', UserController::class);
 
 
@@ -43,9 +52,7 @@ Route::get('/sincription', function () {
     return view('/authentification/regester');
 });
 
-    Route::get('/users', [AdminController::class, 'users'])->name('admin.user');
-    Route::put('/users/{user}', [AdminController::class, 'updateUserStatus'])->name('admin.users.update');
- 
+
 Route::get('/longin', function () {
     return view('/authentification/connection');
 });

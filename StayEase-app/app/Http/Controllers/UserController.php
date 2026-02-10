@@ -62,7 +62,10 @@ class UserController extends Controller
             }
 
             if ($role === 'admin') {
-                return redirect('/admin');
+                // dd($role);
+                
+                return redirect()->route('admin.index');
+                
             }
             else if($role === 'gerant'){
                 return redirect()->route('gerant.index');
@@ -90,20 +93,20 @@ public function store(Request $request)
             $request['status'] = 'desactive';
         } else {
             $request['status'] = 'active';
-            }
-            $validated = $request->validate([
-                'firstname' => 'required|string',
-                'lastname' => 'required|string',
-                'email' => 'required|string',
-                'password' => 'required|string|min:8',
-                'role_id' => 'required',
-                'status' => 'required',
-                ]);
-                User::create($validated);
-                return view('/welcome');
-                }
-                
-                /**
+        }
+        $validated = $request->validate([
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|string',
+            'password' => 'required|string|min:8',
+            'role_id' => 'required',
+            'status' => 'required',
+        ]);
+        User::create($validated);
+        return view('/welcome');
+    }
+                       
+    /**
      * Display the specified resource.
                 */
                 public function show(string $id)

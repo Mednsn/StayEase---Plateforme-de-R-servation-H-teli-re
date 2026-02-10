@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
+class adminmiddleware
+
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        if(!Auth::check()){
+            return redirect('/longin');
+        }
+        $user = auth::user();
+        // dd($user->role->name);
+        if($user->role->name !='admin'){
+           return redirect('/longin');
+        }
+
+        // dd($user);
+        return $next($request);
+    }
+}
