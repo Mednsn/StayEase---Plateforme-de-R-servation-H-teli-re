@@ -14,14 +14,7 @@ class GerantController extends Controller
      */
     public function index()
     {
-       $user = Auth::user();
-
-       if(!Auth::check() ){
-         return view('authentification.connection');
-       }
-       if( $user->role->name !="gerant"){
-         return view('authentification.connection');
-       }
+        
 
         $hotels = Hotel::where("user_id",Auth::id())->get();
         return view("gerant.dashbord",compact('hotels'));

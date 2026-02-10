@@ -20,11 +20,14 @@ use App\Http\Controllers\GerantController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::post('/authentification/logout', [UserController::class, 'logout'])->name("user.logout");
 Route::resource('authentification', UserController::class);
 Route::post('/authentification/login', [UserController::class, 'login']);
+Route::middleware('gerant')->group(function(){
 
-Route::get('/gerant/dashbord', [GerantController::class, '  index'])->name("gerant.index");
+    Route::get('/gerant/dashbord', [GerantController::class, 'index'])->name("gerant.index");
+});
 
 
 Route::post('/authentification/login', [UserController::class, 'login']);
