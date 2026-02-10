@@ -96,8 +96,8 @@
                                     <select name="role_id" class="form-select">
                                         <option selected disabled>Choisir le role</option>
                                         @foreach ($roles as $role )
-                                        <option value="{{ $role->id }}">
-                                            {{ $role->name }}
+                                        <option value="{{$role->id}}">
+                                            {{$role->name}}
                                         </option>
                                         @endforeach
                                     </select>
