@@ -64,7 +64,7 @@ class RoomController extends Controller
         $room = Room::create($validated);
         $room->tags()->sync($request->get('tags', []));
         $room->properties()->sync($request->get('properties', []));
-        return redirect()->route('rooms.show', $room);
+        return redirect()->route('gerant.chombre', $room);
     }
 
     /**
@@ -94,18 +94,17 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Room $room)
+    public function update(Request $request, Room $room)
     {
-         $validation = $request->validate([
+        $request -> validate([
+            'hotel_id' => 'required',
             'number' => 'required',
             'price_per_night' => 'required',
             'capacity' => 'required',
             'description' => 'nullable',
         ]);
-
-        $room->update($validation);
+        $room ->update($request->all());
         return redirect()->route('gerant.chombre');
-        
     }
 
     /**
@@ -116,6 +115,6 @@ class RoomController extends Controller
     {
         $room = Room::where('id',$id)->first();
         $room->delete();
-        return redirect()->route('rooms.index');
+        return redirect()->route('gerant.chombre');
     }
 }
