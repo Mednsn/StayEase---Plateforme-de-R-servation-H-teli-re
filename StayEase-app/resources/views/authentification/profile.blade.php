@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>User Profile - StayEase</title>
 
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="../css/styles.css"  rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
 
-    <!-- Navbar -->
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
             <a class="navbar-brand" href="/">StayEase</a>
@@ -35,20 +35,20 @@
         </div>
     </nav>
 
-    <!-- Profile Header -->
+    
     <header class="bg-dark py-5">
         <div class="container px-5">
             <div class="row align-items-center">
 
-                <!-- Info -->
+               
                 <div class="col-lg-8">
                     <h1 class="text-white fw-bold mb-3">
-                        {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                        {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}
                     </h1>
 
                     <ul class="list-unstyled text-white-50 fs-5">
                         <li><strong>Email:</strong> {{ auth()->user()->email }}</li>
-                        <li><strong>Role:</strong> {{ auth()->user()->role }}</li>
+                        <li><strong>Role:</strong> {{ auth()->user()->role->name }}</li>
                         <li>
                             <strong>Status:</strong>
                             <span class="badge bg-{{ auth()->user()->status === 'active' ? 'success' : 'secondary' }}">
@@ -58,7 +58,7 @@
                     </ul>
                 </div>
 
-                <!-- Avatar -->
+              
                 <div class="col-lg-4 text-center d-none d-lg-block">
                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                          class="rounded-circle"
@@ -70,7 +70,7 @@
         </div>
     </header>
 
-    <!-- Reservations Section -->
+   
     <section class="py-5">
         <div class="container px-5">
             <h2 class="fw-bold mb-4">My Reservations</h2>

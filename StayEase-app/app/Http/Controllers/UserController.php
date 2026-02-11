@@ -8,8 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-use function Laravel\Prompts\alert;
-use function Laravel\Prompts\info;
+
 
 class UserController extends Controller
 {
@@ -51,10 +50,10 @@ class UserController extends Controller
 
             $user = Auth::user();
             $role = $user->role->name;
-            // dd($user->status);
 
             if ($user->status === 'desactive') {
                 Auth::logout();
+                
                 return redirect()->back()->with('error', 'Your account is not active yet. Please contact the admin.');
             }
 
@@ -62,11 +61,16 @@ class UserController extends Controller
                 // dd($role);
 
                 return redirect()->route('admin.index');
+
             } else if ($role === 'gerant') {
+                // dd($request);
                 return redirect()->route('gerant.index');
             } else {
                 return redirect('/hotels');
+
             }
+
+
         }
 
         return back()->with('error', 'Your account or the password not correct');
@@ -80,7 +84,7 @@ class UserController extends Controller
     {
         $id = Role::find($request['role_id']);
 
-        if ($id['name'] == 'gerant') {
+        if ($id->name == 'gerant' || $id['name'] == 'admin') {
             $request['status'] = 'desactive';
         } else {
             $request['status'] = 'active';
@@ -100,9 +104,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        // $user = auth::user();
+         return view('authentification.profile');
     }
 
     /**
@@ -132,6 +137,8 @@ class UserController extends Controller
         $user->update($validated);
 
         return redirect()->route('admin.user');
+
+       
     }
 
 

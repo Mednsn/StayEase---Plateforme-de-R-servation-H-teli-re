@@ -21,9 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/authentification/profile', [UserController::class, 'show'])->name("user.profile");
 Route::post('/authentification/logout', [UserController::class, 'logout'])->name("user.logout");
 Route::resource('authentification', UserController::class);
 Route::post('/authentification/login', [UserController::class, 'login']);
+
 Route::middleware('gerant')->group(function(){
 Route::get('/gerant/chombre', [GerantController::class, 'chombre'])->name("gerant.chombre");
     Route::get('/gerant/dashbord', [GerantController::class, 'index'])->name("gerant.index");
