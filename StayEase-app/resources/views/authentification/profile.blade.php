@@ -13,7 +13,7 @@
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
 
-    <!-- Navbar -->
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
             <a class="navbar-brand" href="/">StayEase</a>
@@ -35,12 +35,12 @@
         </div>
     </nav>
 
-    <!-- Profile Header -->
+    
     <header class="bg-dark py-5">
         <div class="container px-5">
             <div class="row align-items-center">
 
-                <!-- Info -->
+               
                 <div class="col-lg-8">
                     <h1 class="text-white fw-bold mb-3">
                         {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}
@@ -58,7 +58,7 @@
                     </ul>
                 </div>
 
-                <!-- Avatar -->
+              
                 <div class="col-lg-4 text-center d-none d-lg-block">
                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                          class="rounded-circle"
@@ -70,7 +70,7 @@
         </div>
     </header>
 
-    <!-- Reservations Section -->
+   
     <section class="py-5">
         <div class="container px-5">
             <h2 class="fw-bold mb-4">My Reservations</h2>

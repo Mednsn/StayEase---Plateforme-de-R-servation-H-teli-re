@@ -58,6 +58,7 @@ class UserController extends Controller
 
             if ($user->status === 'desactive') {
                 Auth::logout();
+                
                 return redirect()->back()->with('error', 'Your account is not active yet. Please contact the admin.');
             }
 
