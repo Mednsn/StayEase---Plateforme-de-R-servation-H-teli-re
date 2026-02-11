@@ -51,12 +51,15 @@ Route::get('/longin', function () {
     return view('/authentification/connection');
 });
 
-Route::get('rooms/check-room', function () {
-    return view('categories.checkRooms');
-});
-Route::post('/rooms/check-room', [ReservationController::class, 'index'])->name('room.check-rooms');
+Route::get('rooms/reservation', [ReservationController::class,'index'])->name('rooms.reservation');
+Route::post('rooms/create', [ReservationController::class,'store'])->name('reservation.store');
+Route::get('rooms/check-room', [ReservationController::class,'checkChambreIsaviable'])->name('rooms.check-room');
 Route::resource('tags', TagController::class);
 Route::resource('properties', PropertyController::class);
 Route::resource('categories', CategoryController::class);
-Route::resource('room/reservation/paiment', PaimentController::class);
+Route::resource('paiement', PaimentController::class);
+Route::post('/paiement', [PaimentController::class,'index'])->name('paiement.index');
+Route::post('/checkout', [PaimentController::class, 'checkout'])->name('paiement.checkout');
+// Route::get('/success', [PaimentController::class, 'success']);
+// Route::get('/cancel', [PaimentController::class, 'cancel']);
 Route::resource('rooms', RoomController::class);

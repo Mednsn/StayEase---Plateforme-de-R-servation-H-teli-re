@@ -50,14 +50,14 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        
+      
         $validated = $request->validate([
-            // 'hotel_id' => 'required',
-            // 'category_id' => 'required',
-            // 'number' => 'required',
-            // 'price_per_night' => 'required',
-            // 'capacity' => 'required',
-            // 'description' => 'nullable',
+            'hotel_id' => 'required',
+            'category_id' => 'required',
+            'number' => 'required',
+            'price_per_night' => 'required',
+            'capacity' => 'required',
+            'description' => 'nullable',
         ]);
 
         $room = Room::create($validated);
@@ -69,8 +69,9 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show(Room $room,Request $request)
     {
+     
         $room->load('tags', 'properties', 'hotel');
         return view('rooms.show', compact('room'));
     }
