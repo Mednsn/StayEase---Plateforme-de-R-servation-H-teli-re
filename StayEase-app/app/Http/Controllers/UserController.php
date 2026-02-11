@@ -8,8 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-use function Laravel\Prompts\alert;
-use function Laravel\Prompts\info;
+
 
 class UserController extends Controller
 {
@@ -85,7 +84,7 @@ class UserController extends Controller
     {
         $id = Role::find($request['role_id']);
 
-        if ($id['name'] == 'gerant') {
+        if ($id['name'] == 'gerant' || $id['name'] == 'admin') {
             $request['status'] = 'desactive';
         } else {
             $request['status'] = 'active';
@@ -139,7 +138,7 @@ class UserController extends Controller
 
         return redirect()->route('admin.user');
 
-        return redirect()->route('admin.user');
+       
     }
 
 
