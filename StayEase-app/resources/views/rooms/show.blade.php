@@ -73,7 +73,7 @@
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <div class="bg-secondary" style="height: 250px; display: flex; align-items: center; justify-content: center;">
-                            <img src="https://via.placeholder.com/400x250" class="img-fluid" style="object-fit: cover; height: 100%; width: 100%;" alt="Chambre #{{ $room->number }}">
+                            <img src="{{ $room->image }}" class="img-fluid" style="object-fit: cover; height: 100%; width: 100%;" alt="Chambre #{{ $room->number }}">
                         </div>
                     </div>
 

@@ -42,13 +42,8 @@
                             <label for="address" class="form-label">Adresse :</label>
                             <input type="text" class="form-control" id="address" name="address" value="{{ $hotel->address }}" required>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Adresse :</label>
-                            <input type="text" class="form-control" id="address" name="address" value="{{ $hotel->address }}" required>
-                        </div>
                          <div class="mb-3">
-                            <label for="image" class="form-label fw-bold">Adresse :</label>
+                            <label for="image" class="form-label fw-bold">image :</label>
                             <input type="text" name="image" id="image" class="form-control" placeholder="https://thumbs.dreamstime.com/b/hotel-sign-27516625.jpg" value="{{ $hotel->image }}" required>
                         </div>
 

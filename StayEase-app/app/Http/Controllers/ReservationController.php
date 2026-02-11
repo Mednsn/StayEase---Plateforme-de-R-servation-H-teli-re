@@ -42,7 +42,6 @@ class ReservationController extends Controller
      */
     public function checkChambreIsaviable(Request $request)
     {
-        echo "rak hna";
         $request->validate([
             'date_in' => 'required',
             'date_out' => 'required',

@@ -39,7 +39,7 @@
                 <input type="text" name="address" id="address" class="form-control" placeholder="Ex: Rue 123" required>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label fw-bold">Adresse :</label>
+                <label for="image" class="form-label fw-bold">image :</label>
                 <input type="text" name="image" id="image" class="form-control" placeholder="https://thumbs.dreamstime.com/b/hotel-sign-27516625.jpg" required>
             </div>
 

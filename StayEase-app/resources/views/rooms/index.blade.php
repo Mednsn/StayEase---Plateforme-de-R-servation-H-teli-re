@@ -72,7 +72,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100 fw-semibold">Filtrer</button>
             </form>
-            <div >
+            <div>
                 <h6> 📋 check des chambres disponible :</h6>
                 <form action="{{ route('rooms.reservation') }}" method="GET">
                     @csrf
@@ -95,8 +95,8 @@
 
             <div class="col-md-4 p-4 mb-4">
                 <div class="card h-100 shadow-sm border-0">
-                    <div class="rounded bg-secondary d-flex align-items-center justify-content-center" style="height: 250px;">
-
+                    <div class="rounded bg-secondary d-flex align-items-center justify-content-center">
+                        <img src="{{ $room->image }}" alt="" style="height: 218px;">
                     </div>
 
                     <div class="card-body bg-light">

@@ -44,6 +44,10 @@
                 @csrf
                 @method('POST')
                 <div class="mb-3">
+                    <label>image</label>
+                    <input type="text" name="image" class="form-control" required>
+                </div>
+                 <div class="mb-3">
                     <label>Numéro de chambre</label>
                     <input type="text" name="number" class="form-control" required>
                 </div>
@@ -60,7 +64,7 @@
                     <textarea name="description" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label>Tags</label>
+                    <label>Categories</label>
                     <select name="category_id">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>

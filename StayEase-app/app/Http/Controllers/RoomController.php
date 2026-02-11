@@ -61,7 +61,6 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-      
         $validated = $request->validate([
             'hotel_id' => 'required',
             'category_id' => 'required',
@@ -70,9 +69,8 @@ class RoomController extends Controller
             'price_per_night' => 'required',
             'capacity' => 'required',
             'description' => 'nullable',
-        ]);
-
-        $room = Room::create($validated);
+            ]);
+            $room = Room::create($validated);
         $room->tags()->sync($request->get('tags', []));
         $room->properties()->sync($request->get('properties', []));
         return redirect()->route('gerant.chombre', $room);
