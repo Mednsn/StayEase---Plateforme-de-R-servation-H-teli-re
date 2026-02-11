@@ -70,9 +70,11 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        // $userId = Auth::user();
+        $userId = auth()->user()->id;
+
         $name = 'reserver';
         $total = $request->total;
+        // dd($total);
         $request->validate([
             'date_in' => 'required',
             'date_out' => 'required',
@@ -84,11 +86,10 @@ class ReservationController extends Controller
             'check_in' => $request->date_in,
             'check_out' => $request->date_out,
             'room_id' => $request->room_id,
-            'user_id' => 31,
+            'user_id' => $userId,
         ]);
-
-        // problemmmmmm
-        return redirect()->route('paiement.checkout', ['reservation_id' => $reservation->id,'total'=>$total]);
+        $reservationId = $reservation->id;
+        return redirect()->route('paiement.checkout', [$reservationId, $total]);
     }
 
     /**

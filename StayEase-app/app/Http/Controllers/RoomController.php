@@ -17,6 +17,7 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
+        // echo 'hjgjyj';exit;
         $query = Room::with('tags', 'properties')->where('hotel_id', $request->hotel_id);
 
         if ($tagId = $request->get('tag')) {

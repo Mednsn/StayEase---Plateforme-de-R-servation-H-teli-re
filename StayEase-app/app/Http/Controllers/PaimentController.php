@@ -7,7 +7,7 @@ use App\Models\Room;
 use DATETIME;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
-use Stripe\Stripe;
+use Stripe;
 
 use function Laravel\Prompts\alert;
 
@@ -18,15 +18,15 @@ class PaimentController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Room::with('tags', 'properties')->where('rooms.id','=',$request->room_id)->first();
+        $query = Room::with('tags', 'properties')->where('rooms.id', '=', $request->room_id)->first();
         $room_id = $request->room_id;
         $date_in = $request->date_in;
         $date_out = $request->date_out;
         $checkin = new DATETIME($date_in);
         $checkout = new DATETIME($date_out);
-          $diff =  $checkout->diff($checkin)->days;
-          $total = $query->price_per_night*$diff;
-        return view('categories.paiment',compact('query','total','diff','date_in','date_out','room_id'));
+        $diff =  $checkout->diff($checkin)->days;
+        $total = $query->price_per_night * $diff;
+        return view('categories.paiment', compact('query', 'total', 'diff', 'date_in', 'date_out', 'room_id'));
     }
 
     /**
@@ -36,53 +36,56 @@ class PaimentController extends Controller
     {
         //
     }
-    public function store(Request $request)
+    public function store($reservation_id, $total)
     {
+        // echo "wslat hna store";exit;
         //
+        $mode = 'virement bancaire';
+        Paiment::create([
+            'mode_paiement' => $mode,
+            'price_paiment' => $total,
+            'reservation_id' => $reservation_id,
+        ]);
+        return redirect()->route('rooms.index');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function checkout(Request $request)
+    public function checkout($reservation_id, $total)
     {
-        echo "wslat hna checkout";exit;
-       Stripe::setApiKey(config('services.stripe.secret'));
-
-        $session = Session::create([
+        // dd($reservation_id,$total);
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        $name = 'chambre #210';
+        $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'mad',
                     'product_data' => [
-                        'name' => 'Chambre Deluxe',
+                        'name' => $name,
                     ],
-                    'unit_amount' => $request->prix * 100,
+                    'unit_amount' => $total * 100,
                 ],
                 'quantity' => 1,
             ]],
-            'mode' => 'payment',
-            'success_url' => url('/success'),
-            'cancel_url' => url('/cancel'),
+            "mode" => 'payment',
+            "success_url" => route('success', [$reservation_id, $total], true),
+            "cancel_url"  =>  route('cancel', [], true)
         ]);
 
         return redirect($session->url);
     }
 
-    public function success()
-    {
-        return "gjhjhjhjh success";
-    }
-
-    public function cancel()
-    {
-        return "Paiement annulé ❌";
-    }
 
 
     /**
      * Display the specified resource.
      */
+    public function cancel()
+    {
+        return "kayn problem";
+    }
     public function show(Paiment $paiment)
     {
         //
