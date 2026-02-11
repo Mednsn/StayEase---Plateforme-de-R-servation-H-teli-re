@@ -17,7 +17,7 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Room::with('tags', 'properties');
+        $query = Room::with('tags', 'properties')->where('hotel_id', $request->hotel_id);
 
         if ($tagId = $request->get('tag')) {
             $query->whereHas('tags', fn($q) => $q->where('tags.id', $tagId));
@@ -30,9 +30,16 @@ class RoomController extends Controller
         $rooms = $query->get();
         $allTags = Tag::all();
         $allProperties = Property::all();
-
+        
         return view('rooms.index', compact('rooms', 'allTags', 'allProperties'));
-    }
+        }
+        
+        
+        
+        /**
+         * Show the form for creating a new resource.
+        */
+       
 
 
 
@@ -40,12 +47,12 @@ class RoomController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    { 
-        $hotels = Hotel::where("user_id",Auth::id())->get();
+    {
+        $hotels = Hotel::where("user_id", Auth::id())->get();
         $categories = Category::all();
         $tags = Tag::all();
         $properties = Property::all();
-        return view('rooms.create', compact('tags', 'properties', 'categories','hotels'));
+        return view('rooms.create', compact('tags', 'properties', 'categories', 'hotels'));
     }
 
     /**
@@ -53,8 +60,10 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
+      
         $validated = $request->validate([
             'hotel_id' => 'required',
+            'category_id' => 'required',
             'number' => 'required',
             'price_per_night' => 'required',
             'capacity' => 'required',
@@ -70,8 +79,9 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show(Room $room,Request $request)
     {
+     
         $room->load('tags', 'properties', 'hotel');
         return view('rooms.show', compact('room'));
     }
@@ -80,15 +90,15 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( string $id)
+    public function edit(string $id)
     {
 
-        $room = Room::where('id',$id)->first();
-        $hotels = Hotel::where("user_id",Auth::id())->get();
+        $room = Room::where('id', $id)->first();
+        $hotels = Hotel::where("user_id", Auth::id())->get();
         $categories = Category::all();
         $tags = Tag::all();
         $properties = Property::all();
-        return view('rooms.edit', compact('room','tags', 'properties', 'categories','hotels'));
+        return view('rooms.edit', compact('room', 'tags', 'properties', 'categories', 'hotels'));
     }
 
     /**
@@ -96,14 +106,17 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        $request -> validate([
+        $request->validate([
             'hotel_id' => 'required',
             'number' => 'required',
             'price_per_night' => 'required',
             'capacity' => 'required',
             'description' => 'nullable',
         ]);
-        $room ->update($request->all());
+        $room->update($request->all());
+        $room->tags()->sync($request->get('tags', []));
+        $room->properties()->sync($request->get('properties', []));
+
         return redirect()->route('gerant.chombre');
     }
 
@@ -111,9 +124,9 @@ class RoomController extends Controller
      * Remove the specified resource from storage.
      */
 
-    public function destroy( string $id)
+    public function destroy(string $id)
     {
-        $room = Room::where('id',$id)->first();
+        $room = Room::where('id', $id)->first();
         $room->delete();
         return redirect()->route('gerant.chombre');
     }

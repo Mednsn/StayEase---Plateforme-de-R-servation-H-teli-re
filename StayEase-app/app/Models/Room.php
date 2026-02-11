@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $fillable = ['hotel_id', 'number', 'price_per_night', 'capacity', 'description'];
+    protected $fillable = ['hotel_id', 'number', 'price_per_night', 'capacity', 'description','category_id'];
 
     public function tags()
     {
@@ -23,5 +23,9 @@ class Room extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class, 'room_id');
     }
 }

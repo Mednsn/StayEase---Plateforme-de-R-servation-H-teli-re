@@ -31,19 +31,15 @@ class UserController extends Controller
 
         $roles = Role::all();
         return view('/authentification/regester', compact('roles'));
-
     }
     public function logout()
     {
 
         auth::logout();
         return redirect('/');
-
-
     }
     public function login(Request $request)
     {
-
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -123,7 +119,6 @@ class UserController extends Controller
 
         $roles = Role::all();
         return view('admin.edit', compact('user', 'roles'));
-
     }
 
 
@@ -144,6 +139,7 @@ class UserController extends Controller
 
         return redirect()->route('admin.user');
 
+        return redirect()->route('admin.user');
     }
 
 
