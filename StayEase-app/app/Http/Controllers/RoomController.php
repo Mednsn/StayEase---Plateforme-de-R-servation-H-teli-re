@@ -30,9 +30,16 @@ class RoomController extends Controller
         $rooms = $query->get();
         $allTags = Tag::all();
         $allProperties = Property::all();
-
+        
         return view('rooms.index', compact('rooms', 'allTags', 'allProperties'));
-    }
+        }
+        
+        
+        
+        /**
+         * Show the form for creating a new resource.
+        */
+       
 
 
 
@@ -53,8 +60,10 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
+      
         $validated = $request->validate([
             'hotel_id' => 'required',
+            'category_id' => 'required',
             'number' => 'required',
             'price_per_night' => 'required',
             'capacity' => 'required',
@@ -70,8 +79,9 @@ class RoomController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show(Room $room,Request $request)
     {
+     
         $room->load('tags', 'properties', 'hotel');
         return view('rooms.show', compact('room'));
     }
