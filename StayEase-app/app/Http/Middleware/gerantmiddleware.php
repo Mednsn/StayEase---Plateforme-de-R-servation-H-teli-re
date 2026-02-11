@@ -16,12 +16,14 @@ class gerantmiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // dd($request);
          if(!Auth::check()){
             return redirect('/longin');
         }
         $user = auth::user();
-        // dd($user->role->name);
+        
         if($user->role->name !='gerant'){
+            // dd($user->role->name);
            return redirect('/longin');
         }
 
