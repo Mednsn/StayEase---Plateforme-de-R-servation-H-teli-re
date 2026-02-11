@@ -65,6 +65,7 @@ class RoomController extends Controller
             'hotel_id' => 'required',
             'category_id' => 'required',
             'number' => 'required',
+            'image' => 'required',
             'price_per_night' => 'required',
             'capacity' => 'required',
             'description' => 'nullable',
@@ -109,6 +110,7 @@ class RoomController extends Controller
         $request->validate([
             'hotel_id' => 'required',
             'number' => 'required',
+            'image' => 'required',
             'price_per_night' => 'required',
             'capacity' => 'required',
             'description' => 'nullable',
