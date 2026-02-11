@@ -55,6 +55,7 @@
                                 <input type="hidden" name="date_in" value="{{ $date_in }}">
                                 <input type="hidden" name="date_out" value="{{ $date_out }}">
                                 <input type="hidden" name="room_id" value="{{ $room_id }}">
+                                <input type="hidden" name="total" value="{{ $total }}">
                                 <input type="hiddin" name="name" value="reservation terminer" disabled><br>
                                 <label class="form-label">Mode de paiement</label>
                                 <select class="form-select cgap-3">

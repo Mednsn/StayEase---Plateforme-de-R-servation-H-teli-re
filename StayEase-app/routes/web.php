@@ -67,6 +67,10 @@ Route::resource('properties', PropertyController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('paiement', PaimentController::class);
 Route::post('/paiement', [PaimentController::class,'index'])->name('paiement.index');
-Route::post('/checkout', [PaimentController::class, 'checkout'])->name('paiement.checkout');
+Route::get('/success/{reservationId}/{total}', [PaimentController::class,'store'])->name('success');
+Route::get('/cancel', [PaimentController::class,'cancel'])->name('cancel');
+Route::get('checkout/{reservationId}/{total}', [PaimentController::class, 'checkout'])->name('paiement.checkout');
 
 Route::resource('rooms', RoomController::class);
+
+
