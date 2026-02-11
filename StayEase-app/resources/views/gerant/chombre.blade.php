@@ -20,6 +20,7 @@
             <a href="{{ route('admin.index') }}" class="nav-link text-white small opacity-75">
                 <i class="bi bi-speedometer2 me-2"></i> Dashboard Gerant
             </a>
+          
 
             <div class="text-secondary small fw-bold text-uppercase mt-3 mb-1" style="font-size:0.7rem;">
                 Management
@@ -28,7 +29,7 @@
             <a href="{{ route('gerant.index') }}" class="nav-link text-white small opacity-75">
                 <i class="bi bi-building me-2"></i> Mes Hôtels
             </a>
-             <a href="{{ route('gerant.chombre') }}" class="nav-link text-white small opacity-75">
+            <a href="{{ route('gerant.chombre') }}" class="nav-link text-white small opacity-75">
                  <i class="bi bi-building me-2"></i> Chambres
             </a>
         </div>
@@ -67,27 +68,26 @@
                     <table class="table table-bordered table-hover align-middle">
                         <thead class="table-light">
                             <tr class="text-uppercase small fw-bold text-secondary">
-                                <th>Nom</th>
-                                <th>Adresse</th>
+                                <th>Nom de hotel</th>
+                                <th>number</th>
+                                <th>price</th>
+                                <th>capacity</th>
                                 <th>description</th>
-                                <th>City</th>
-                                <th>Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                            <tbody>
-                            @foreach($hotels as $hotel)
+                            @foreach($chambres as $chombre)
                             <tr>
-                                <td class="fw-bold">{{ $hotel->name }}</td>
-                                <td>{{ $hotel->address }}</td>
-                                <td>{{ $hotel->description}}</td>
-                                <td>{{ $hotel->city}}</td>
-                                <td>{{ $hotel->status }} </td>
+                                <td class="fw-bold">{{ $chombre->hotel_name}}</td>
+                                <td>{{ $chombre->number }}</td>
+                                <td>{{ $chombre->price_per_night}}</td>
+                                <td>{{ $chombre->capacity}}</td>
+                                <td>{{ $chombre->description}} </td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
-                                        <a href="{{route('hotels.edit',$hotel)}}">
-                                          <a href="{{ route('hotels.edit', $hotel) }}" class="btn btn-sm btn-info"> <i class="bi bi-arrow-repeat"></i> </a>
-                                        <form action="{{ route('hotels.destroy', $hotel) }}"    method="POST">
+                                          <a href="{{route('rooms.edit', $chombre->id)}}" class="btn btn-sm btn-info"> <i class="bi bi-arrow-repeat"></i> </a>
+                                        <form action="{{route('rooms.destroy',$chombre->id)}}"    method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger btn-sm">

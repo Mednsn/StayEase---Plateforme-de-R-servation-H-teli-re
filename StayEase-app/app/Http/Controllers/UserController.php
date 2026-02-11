@@ -31,22 +31,19 @@ class UserController extends Controller
 
         $roles = Role::all();
         return view('/authentification/regester', compact('roles'));
-
     }
     public function logout()
     {
-       
-          auth::logout();
+
+        auth::logout();
         return redirect('/');
-
-
     }
     public function login(Request $request)
-{
-    $credentials = $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
         if (Auth::attempt($credentials)) {
 
@@ -61,18 +58,15 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'Your account is not active yet. Please contact the admin.');
             }
 
-            if ($role === 'admine') {
-                return redirect('/admin');
-            }
-            else if($role === 'gerant'){
+            if ($role === 'admin') {
+                // dd($role);
+
+                return redirect()->route('admin.index');
+            } else if ($role === 'gerant') {
                 return redirect()->route('gerant.index');
+            } else {
+                return redirect('/hotels');
             }
-           else{
-             return redirect('/hotels');
-
-           }
-
-           
         }
 
         return back()->with('error', 'Your account or the password not correct');
@@ -85,6 +79,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $id = Role::find($request['role_id']);
+
         if ($id['name'] == 'gerant') {
             $request['status'] = 'desactive';
         } else {
@@ -113,11 +108,11 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-     public function edit(User $user){
+    public function edit(User $user)
+    {
 
-       $roles = Role::all();
-      return view('admin.edit',compact('user','roles'));
-
+        $roles = Role::all();
+        return view('admin.edit', compact('user', 'roles'));
     }
 
 
@@ -125,26 +120,27 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
 
-     public function update(Request $request,User $user){
+    public function update(Request $request, User $user)
+    {
 
-      $validated = $request->validate([
+        $validated = $request->validate([
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
             'email' => 'required|max:255',
-            'role_id'=>'required|integer',
+            'role_id' => 'required|integer',
         ]);
         $user->update($validated);
 
-      return redirect()->route('admin.user');
-
+        return redirect()->route('admin.user');
     }
 
 
     /**
      * Remove the specified resource from storage.
      */
-   public function destroy(User $user){
-      $user->delete();
-     return redirect()->route('admin.user');
-   }
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.user');
+    }
 }

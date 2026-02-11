@@ -20,18 +20,20 @@ class AdminController extends Controller
     public function users()
     {
         $users = User::with('role')->get(); 
+        // dd($users);
         return view('admin.users', compact('users'));
     }
     public function updateUserStatus(Request $request, User $user)
-{
+{ 
+    // dd($re   quest);
     $request->validate([
         'status' => 'required|in:active,desactive',
-        'role_id' => 'required|exists:roles,id',
+        
     ]);
 
     $user->update([
         'status' => $request->status,
-        'role_id' => $request->role_id,
+       
     ]);
 
     return redirect()->back()->with('success', 'User updated successfully');
@@ -78,5 +80,4 @@ class AdminController extends Controller
 
    }
 
-   
 }

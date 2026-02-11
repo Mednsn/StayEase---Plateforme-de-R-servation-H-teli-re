@@ -6,7 +6,7 @@ use App\Models\Property;
 use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\Tag;
-use DateTime;
+use App\Models\User;
 use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -70,7 +70,7 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $userId = auth()->id();
+        // $userId = Auth::user();
         $name = 'reserver';
         $total = $request->total;
         $request->validate([

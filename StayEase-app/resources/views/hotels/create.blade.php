@@ -30,7 +30,7 @@
             </div>
 
               <div class="mb-3">
-                <label for="city" class="form-label fw-bold">Address :</label>
+                <label for="city" class="form-label fw-bold">Ville :</label>
                 <input type="text" name="city" id="city" class="form-control"  required>
             </div>
 
@@ -38,10 +38,14 @@
                 <label for="address" class="form-label fw-bold">Adresse :</label>
                 <input type="text" name="address" id="address" class="form-control" placeholder="Ex: Rue 123" required>
             </div>
+            <div class="mb-3">
+                <label for="image" class="form-label fw-bold">Adresse :</label>
+                <input type="text" name="image" id="image" class="form-control" placeholder="https://thumbs.dreamstime.com/b/hotel-sign-27516625.jpg" required>
+            </div>
 
             <div class="d-grid gap-2 mt-4">
                 <button type="submit" class="btn btn-primary">Enregistrer l'hôtel</button>
-                <a href="{{ route('hotels.index') }}" class="btn btn-outline-secondary">Retour à la liste</a>
+                <a href="{{ route('gerant.index') }}" class="btn btn-outline-secondary">Retour à la liste</a>
             </div>
         </form>
     </div>

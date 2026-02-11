@@ -54,12 +54,13 @@ class HotelController extends Controller
             'name' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'description' => 'required',
-            'address' => 'required|string|max:255'
+            'address' => 'required|string|max:255',
+            'image' => 'required|string'
         ]);
          $validated['user_id'] = Auth::id();
     
         Hotel::create($validated);
-        return redirect()->route('hotels.index');
+        return redirect()->route('gerant.index');
     }
 
 
@@ -96,11 +97,12 @@ class HotelController extends Controller
             'city' => 'required|string|max:255',
             'description' => 'required',
             'address' => 'required|string|max:255',
+            'image' => 'required|string'
         ]);
 
     
         $hotel->update($validated);
-        return redirect()->route('hotels.index');
+        return redirect()->route('gerant.index');
     }
 
     /**
@@ -109,6 +111,6 @@ class HotelController extends Controller
     public function destroy(Hotel $hotel)
     {
          $hotel->delete();
-        return redirect()->route('hotels.index');
+        return redirect()->route('gerant.index');
     }
 }

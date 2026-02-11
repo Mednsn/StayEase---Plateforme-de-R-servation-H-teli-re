@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Hotels - Start Bootstrap</title>
+    <title>Hotels - StayEase</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
@@ -73,7 +73,7 @@
                     @foreach($hotels as $hotel)
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0 overflow-hidden">
-                                <img class="card-img-top" src="https://media.istockphoto.com/id/487042276/photo/hotel-sign.jpg?s=612x612&w=0&k=20&c=DjEVAoFnjB2cWwX28cxSKWkxsbze7o9jgkYrhyfmq9E=" alt="..." />
+                                <img class="card-img-top" src="{{$hotel->image}}" alt="image de hotel" />
                                 <div class="card-body p-4">
                                     <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
                                     <h5 class="card-title mb-3 fw-bold">{{ $hotel->name }}</h5>

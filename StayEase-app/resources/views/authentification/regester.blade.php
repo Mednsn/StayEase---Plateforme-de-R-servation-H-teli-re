@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content />
     <meta name="author" content />
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>StayEase</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -96,8 +96,8 @@
                                     <select name="role_id" class="form-select">
                                         <option selected disabled>Choisir le role</option>
                                         @foreach ($roles as $role )
-                                        <option value="{{ $role->id }}">
-                                            {{ $role->name }}
+                                        <option value="{{$role->id}}">
+                                            {{$role->name}}
                                         </option>
                                         @endforeach
                                     </select>

@@ -46,13 +46,6 @@
 
 <body>
 
-    <nav class="navbar navbar-light mb-4">
-        <div class="container">
-            <span class="navbar-brand mb-0 h1 text-white">Gestion des Chambres</span>
-            <a href="{{ route('rooms.create', ['hotel_id' => request('hotel_id')]) }}" class="btn btn-light">+ Ajouter</a>
-        </div>
-    </nav>
-
     <div class="container">
         <div class="aligne">
 

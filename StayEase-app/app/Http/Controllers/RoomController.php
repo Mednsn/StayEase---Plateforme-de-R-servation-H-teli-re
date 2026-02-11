@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Hotel;
 use App\Models\Room;
 use App\Models\Tag;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
@@ -15,7 +17,7 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Room::with('tags', 'properties');
+        $query = Room::with('tags', 'properties')->where('hotel_id', $request->hotel_id);
 
         if ($tagId = $request->get('tag')) {
             $query->whereHas('tags', fn($q) => $q->where('tags.id', $tagId));
@@ -37,12 +39,20 @@ class RoomController extends Controller
         /**
          * Show the form for creating a new resource.
         */
-        public function create()
-        {
+       
+
+
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $hotels = Hotel::where("user_id", Auth::id())->get();
         $categories = Category::all();
         $tags = Tag::all();
         $properties = Property::all();
-        return view('rooms.create', compact('tags', 'properties', 'categories'));
+        return view('rooms.create', compact('tags', 'properties', 'categories', 'hotels'));
     }
 
     /**
@@ -63,7 +73,7 @@ class RoomController extends Controller
         $room = Room::create($validated);
         $room->tags()->sync($request->get('tags', []));
         $room->properties()->sync($request->get('properties', []));
-        return redirect()->route('rooms.show', $room);
+        return redirect()->route('gerant.chombre', $room);
     }
 
     /**
@@ -80,26 +90,44 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit(string $id)
     {
-        return view('rooms.edit', compact('room'));
+
+        $room = Room::where('id', $id)->first();
+        $hotels = Hotel::where("user_id", Auth::id())->get();
+        $categories = Category::all();
+        $tags = Tag::all();
+        $properties = Property::all();
+        return view('rooms.edit', compact('room', 'tags', 'properties', 'categories', 'hotels'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Room $room)
     {
-        //
+        $request->validate([
+            'hotel_id' => 'required',
+            'number' => 'required',
+            'price_per_night' => 'required',
+            'capacity' => 'required',
+            'description' => 'nullable',
+        ]);
+        $room->update($request->all());
+        $room->tags()->sync($request->get('tags', []));
+        $room->properties()->sync($request->get('properties', []));
+
+        return redirect()->route('gerant.chombre');
     }
 
     /**
      * Remove the specified resource from storage.
      */
 
-    public function destroy(Room $room)
+    public function destroy(string $id)
     {
+        $room = Room::where('id', $id)->first();
         $room->delete();
-        return redirect()->route('rooms.index');
+        return redirect()->route('gerant.chombre');
     }
 }
