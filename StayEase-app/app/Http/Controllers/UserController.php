@@ -84,7 +84,7 @@ class UserController extends Controller
     {
         $id = Role::find($request['role_id']);
 
-        if ($id['name'] == 'gerant' || $id['name'] == 'admin') {
+        if ($id->name == 'gerant' || $id['name'] == 'admin') {
             $request['status'] = 'desactive';
         } else {
             $request['status'] = 'active';
