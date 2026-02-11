@@ -21,9 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/authentification/profile', [UserController::class, 'show'])->name("user.profile");
 Route::post('/authentification/logout', [UserController::class, 'logout'])->name("user.logout");
 Route::resource('authentification', UserController::class);
 Route::post('/authentification/login', [UserController::class, 'login']);
+
 Route::middleware('gerant')->group(function(){
 Route::get('/gerant/chombre', [GerantController::class, 'chombre'])->name("gerant.chombre");
     Route::get('/gerant/dashbord', [GerantController::class, 'index'])->name("gerant.index");
@@ -57,12 +59,14 @@ Route::get('/longin', function () {
     return view('/authentification/connection');
 });
 
-Route::get('rooms/check-room', function () {
-    return view('categories.checkRooms');
-});
-Route::post('/rooms/check-room', [ReservationController::class, 'index'])->name('room.check-rooms');
+Route::get('rooms/reservation', [ReservationController::class,'index'])->name('rooms.reservation');
+Route::post('rooms/create', [ReservationController::class,'store'])->name('reservation.store');
+Route::get('rooms/check-room', [ReservationController::class,'checkChambreIsaviable'])->name('rooms.check-room');
 Route::resource('tags', TagController::class);
 Route::resource('properties', PropertyController::class);
 Route::resource('categories', CategoryController::class);
+Route::resource('paiement', PaimentController::class);
+Route::post('/paiement', [PaimentController::class,'index'])->name('paiement.index');
+Route::post('/checkout', [PaimentController::class, 'checkout'])->name('paiement.checkout');
+
 Route::resource('rooms', RoomController::class);
-Route::resource('room/reservation/paiment', PaimentController::class);

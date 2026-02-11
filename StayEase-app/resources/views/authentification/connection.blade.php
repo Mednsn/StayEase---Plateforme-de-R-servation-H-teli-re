@@ -53,7 +53,7 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form action="/authentification/login " method="post">
+                                <form action="/authentification/login " method="post">
                                 @csrf
                                 @if (session('error'))
                                     <div class="alert alert-danger">
@@ -61,7 +61,7 @@
                                     </div>
                                 @endif
                                 @method('post')
-                                <!-- Email address input-->
+
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="email" name="email" type="email"
                                         placeholder="name@example.com" data-sb-validations="required,email" />
@@ -71,7 +71,7 @@
                                     <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.
                                     </div>
                                 </div>
-                                <!-- Phone number input-->
+
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="password" name="password" type="password"
                                         placeholder="****" data-sb-validations="required" />
@@ -80,25 +80,25 @@
                                         required.</div>
                                 </div>
 
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
+                             
                                 <div class="d-none" id="submitSuccessMessage">
                                     <div class="text-center mb-3">
                                         <div class="fw-bolder">Form submission successful!</div>
                                     </div>
                                 </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
+                               
                                 <div class="d-none" id="submitErrorMessage">
                                     <div class="text-center text-danger mb-3">Error sending message!</div>
                                 </div>
-                                <!-- Submit Button-->
-                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton"
-                                        type="submit">Submit</button></div>
+
+                                <div class="d-grid mb-3">
+                                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button>
+                                </div>
+
+                                <div class="text-center">
+                                    <p>Don't have an account? <a href="{{ route('authentification.create') }}">S'inscrire</a></p>
+                                    
+                                </div>
 
                             </form>
                         </div>

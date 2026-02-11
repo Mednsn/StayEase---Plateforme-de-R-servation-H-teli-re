@@ -10,7 +10,7 @@
 <body class="bg-light">
 
     <div class="d-flex">
-        <aside class="bg-dark text-white p-3 min-vh-100 d-none d-md-block" style="width: 250px;">
+         <aside class="bg-dark text-white p-3 min-vh-100 d-none d-md-block" style="width: 250px;">
             <div class="fs-5 fw-bold mb-4 text-center text-uppercase">
                 <i class="bi bi-emoji-laughing-fill me-2 text-warning"></i>StayEase
             </div>
@@ -33,6 +33,19 @@
                     <span><i class="bi bi-people me-2"></i> user</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
+                 @auth
+                 <div class="d-flex flex-column flex-end">
+                           
+                 <li class="nav-item"><a class="nav-link text-white small opacity-75 d-flex justify-content-between text-decoration-none p-2" href="{{route('user.profile')}}">profile</a></li>
+
+                            <form action="{{route('user.logout')}}" method="post">
+                                @csrf
+                                <button class="btn btn-danger btn-lg px-4 me-sm-3">log out</button>
+                            </form>
+                        
+                 </div>
+                 @endauth
+                       
             </div>
         </aside>
 
